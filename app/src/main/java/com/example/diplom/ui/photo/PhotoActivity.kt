@@ -1,30 +1,22 @@
-package com.example.diplom.activity
+package com.example.diplom.ui.photo
 
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
-import com.example.diplom.PhotoContainer
-import com.example.diplom.PhotoCreator
+import com.example.diplom.utils.PhotoCreator
 import com.example.diplom.R
+import com.example.diplom.base.BaseActivity
+import com.example.diplom.model.PhotoContainer
 import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
-
-class MainActivity : AppCompatActivity() {
+class PhotoActivity : BaseActivity<PhotoPresenter>(), PhotoView {
     val REQUEST_IMAGE_CAPTURE = 1
     private lateinit var photo: Button
     private lateinit var imagePhoto: ImageView
-    private lateinit var photoURI: Uri
     val photoContainer = PhotoContainer()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +26,12 @@ class MainActivity : AppCompatActivity() {
         imagePhoto = findViewById<ImageView>(R.id.imagePhoto)
 
         photo.setOnClickListener{
-            val photoCreator = PhotoCreator(this, photoContainer)
+            val photoCreator =
+                PhotoCreator(this, photoContainer)
             photoCreator.photoGo()
         }
 
+        presenter.onViewCreated()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -51,5 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun instantiatePresenter(): PhotoPresenter {
+        return PhotoPresenter(this)
+    }
 }

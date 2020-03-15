@@ -1,4 +1,4 @@
-package com.example.diplom
+package com.example.diplom.model
 
 class PhotoContainer {
     val set: MutableSet<String> = mutableSetOf()

@@ -1,12 +1,12 @@
-package com.example.diplom
+package com.example.diplom.utils
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
+import com.example.diplom.model.PhotoContainer
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
