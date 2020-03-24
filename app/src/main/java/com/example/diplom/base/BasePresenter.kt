@@ -1,5 +1,11 @@
 package com.example.diplom.base
 
+import com.example.diplom.injection.component.DaggerPresenterInjector
+import com.example.diplom.injection.component.PresenterInjector
+import com.example.diplom.injection.module.AdapterModule
+import com.example.diplom.injection.module.ContextModule
+import com.example.diplom.ui.main.MainPresenter
+
 /**
  * Base presenter any presenter of the application must extend. It provides initial injections and
  * required methods.
@@ -8,6 +14,16 @@ package com.example.diplom.base
  * @constructor Injects the required dependencies
  */
 abstract class BasePresenter<out V : BaseView>(protected val view: V) {
+    /**
+     * The injector used to inject required dependencies
+     */
+    private val injector: PresenterInjector = DaggerPresenterInjector
+        .builder()
+        .baseView(view)
+        .contextModule(ContextModule)
+        .notesAdapterModule(AdapterModule)
+        .build()
+
     init {
         inject()
     }
@@ -26,6 +42,8 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
      * Injects the required dependencies
      */
     private fun inject() {
-        //TODO: Implement this method
+        when (this) {
+            is MainPresenter -> injector.inject(this)
+        }
     }
 }
