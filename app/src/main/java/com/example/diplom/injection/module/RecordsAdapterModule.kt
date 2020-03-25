@@ -1,18 +1,18 @@
 package com.example.diplom.injection.module
 
 import android.content.Context
-import com.example.diplom.ui.main.RecordsAdapter
+import com.example.diplom.utils.adapters.RecordsAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 
 @Module
 @Suppress("unused")
-object AdapterModule {
+object RecordsAdapterModule {
     @Provides
     @JvmStatic
     @Reusable
-    internal fun provideNotesAdapter(context: Context): RecordsAdapter {
+    internal fun provideRecordsAdapter(context: Context): RecordsAdapter {
         return RecordsAdapter(context)
     }
 }

@@ -1,11 +1,11 @@
-package com.example.diplom.ui.main
+package com.example.diplom.utils.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplom.R
-import com.example.diplom.databinding.NoteBinding
+import com.example.diplom.databinding.RecordBinding
 import com.example.diplom.model.Record
 
 class RecordsAdapter(private val context: Context) : RecyclerView.Adapter<RecordsAdapter.NotesViewHolder>() {
@@ -16,15 +16,17 @@ class RecordsAdapter(private val context: Context) : RecyclerView.Adapter<Record
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
         val layoutInflater = LayoutInflater.from(context)
-        val binding: NoteBinding = DataBindingUtil.inflate(layoutInflater, R.layout.note, parent, false)
-        return NotesViewHolder(binding)
+        val binding: RecordBinding = DataBindingUtil.inflate(layoutInflater, R.layout.record, parent, false)
+        return NotesViewHolder(
+            binding
+        )
     }
 
     override fun getItemCount(): Int {
         return records.size
     }
 
-    override fun onBindViewHolder(holder: RecordsAdapter.NotesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         holder.bind(records[position])
     }
 
@@ -32,7 +34,7 @@ class RecordsAdapter(private val context: Context) : RecyclerView.Adapter<Record
      * The ViewHolder of the adapter
      * @property binding the DataBinging object for Post item
      */
-    class NotesViewHolder(private val binding: NoteBinding) : RecyclerView.ViewHolder(binding.root) {
+    class NotesViewHolder(private val binding: RecordBinding) : RecyclerView.ViewHolder(binding.root) {
         /**
          * Binds a post into the view
          */
@@ -42,7 +44,7 @@ class RecordsAdapter(private val context: Context) : RecyclerView.Adapter<Record
         }
     }
 
-    fun updateNotes(records: List<Record>) {
+    fun updateRecords(records: List<Record>) {
         this.records = records
     }
 }
