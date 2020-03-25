@@ -2,9 +2,10 @@ package com.example.diplom.ui.main
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.widget.DatePicker
 import com.example.diplom.base.BasePresenter
 import com.example.diplom.model.Record
-import com.example.diplom.utils.adapters.RecordsAdapter
+import com.example.diplom.utils.MyCalendar
 import java.util.*
 import javax.inject.Inject
 
@@ -12,9 +13,13 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     @Inject
     lateinit var context: Context
 
+    @Inject
+    lateinit var calendar: MyCalendar
+
     override fun onViewCreated() {
         super.onViewCreated()
         view.setRecords(generateFakeRecords())
+        view.setDate(calendar.toString())
     }
 
     private fun generateFakeRecords(): List<Record> {
@@ -26,17 +31,15 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     }
 
     fun datePickerDialog() {
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
+        val year = calendar.year
+        val month = calendar.month
+        val day = calendar.day
 
-        val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val callback = DatePickerDialog.OnDateSetListener{  v, y, m, d ->
+            calendar.newDate(d,m,y)
+            view.setDate(calendar.toString())
+        }
 
-            // Display Selected date in textbox
-            lblDate.setText("" + dayOfMonth + " " + MONTHS[monthOfYear] + ", " + year)
-        }, year, month, day)
-
-        dpd.show()
+        DatePickerDialog(context, callback, year, month, day).show()
     }
 }

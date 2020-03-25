@@ -43,4 +43,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
             presenter.datePickerDialog()
         }
     }
+
+    override fun setDate(date: String) {
+        this.date.text = date
+    }
 }

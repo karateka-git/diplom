@@ -10,7 +10,6 @@ import dagger.Provides
  * Module which provides all required dependencies about Context
  */
 @Module
-// Safe here as we are dealing with a Dagger 2 module
 @Suppress("unused")
 object ContextModule {
     /**
