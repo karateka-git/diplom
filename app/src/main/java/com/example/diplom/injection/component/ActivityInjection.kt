@@ -4,6 +4,7 @@ import com.example.diplom.base.BaseView
 import com.example.diplom.injection.module.ContextModule
 import com.example.diplom.injection.module.RecordsAdapterModule
 import com.example.diplom.ui.main.MainActivity
+import com.example.diplom.utils.adapters.RecordsAdapter
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,7 +21,7 @@ interface ActivityInjector {
 
         fun contextModule(contextModule: ContextModule): Builder
 
-        fun recordsAdapterModule(notesAdapterModule: RecordsAdapterModule): Builder
+        fun recordsAdapterModule(recordsAdapterModule: RecordsAdapterModule): Builder
 
         @BindsInstance
         fun baseView(baseView: BaseView): Builder

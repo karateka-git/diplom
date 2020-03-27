@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="note"
+            name="record"
             type="com.example.diplom.model.Record" />
     </data>
 
@@ -19,7 +19,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:text="@{note.title}"
+            android:text="@{record.title}"
             app:layout_constraintEnd_toStartOf="@+id/time"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
-            android:text="@{note.date.toString()}"
+            android:text="@{record.date.toString()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{note.info}"
+            android:text="@{record.info}"
             app:layout_constraintEnd_toEndOf="@+id/time"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/title" />

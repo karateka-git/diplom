@@ -24,9 +24,9 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
 
     private fun generateFakeRecords(): List<Record> {
         val values = mutableListOf<Record>()
-        values.add(Record(Date(), "test1", "test1 tester1 testers1"))
-        values.add(Record(Date(), "test2", "test2 tester2 testers2"))
-        values.add(Record(Date(), "test3", "test3 tester3 testers3"))
+        for (i in 0 until 30) {
+            values.add(Record(Date(), "test$i", "test$i tester$i testers$i"))
+        }
         return values
     }
 

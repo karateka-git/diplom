@@ -12,7 +12,7 @@ object RecordsAdapterModule {
     @Provides
     @JvmStatic
     @Reusable
-    internal fun provideRecordsAdapter(context: Context): RecordsAdapter {
-        return RecordsAdapter(context)
+    internal fun provideRecordsAdapter(listener: RecordsAdapter.OnRecordListener): RecordsAdapter {
+        return RecordsAdapter(listener)
     }
 }

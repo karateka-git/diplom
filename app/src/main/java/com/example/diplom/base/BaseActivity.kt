@@ -16,7 +16,7 @@ abstract class BaseActivity<P : BasePresenter<BaseView>> : BaseView, AppCompatAc
         .builder()
         .baseView(this)
         .contextModule(ContextModule)
-        .recordsAdapterModule(RecordsAdapterModule)
+//        .recordsAdapterModule(RecordsAdapterModule)
         .build()
 
     init {

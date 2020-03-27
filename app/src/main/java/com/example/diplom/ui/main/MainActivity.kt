@@ -1,6 +1,7 @@
 package com.example.diplom.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diplom.R
@@ -10,10 +11,11 @@ import com.example.diplom.utils.adapters.RecordsAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity<MainPresenter>(), MainView {
+class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnRecordListener {
 
-    @Inject
-    lateinit var recordsAdapter: RecordsAdapter
+//    @Inject
+//    lateinit var recordsAdapter: RecordsAdapter
+    val recordsAdapter = RecordsAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,5 +48,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
     override fun setDate(date: String) {
         this.date.text = date
+    }
+
+    override fun onRecordClick(position: Int) {
+        Log.e("TEST", "Record click $position")
     }
 }
