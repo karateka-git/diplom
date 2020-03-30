@@ -1,5 +1,6 @@
 package com.example.diplom.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,6 +8,7 @@ import com.example.diplom.R
 import com.example.diplom.base.BaseActivity
 import com.example.diplom.injection.component.DaggerMainActivityInjector
 import com.example.diplom.model.Record
+import com.example.diplom.ui.record.RecordActivity
 import com.example.diplom.utils.adapters.RecordsAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -56,6 +58,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     }
 
     override fun onRecordClick(position: Int) {
-        Log.e("TEST", "Record click $position")
+        val intent: Intent = Intent(this, RecordActivity::class.java)
+        startActivity(intent)
     }
 }

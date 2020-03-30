@@ -36,9 +36,6 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
          * adapterPosition - updated adapter's position of this holder
          * 16 ms difference between them
          */
-        holder.itemView.setOnClickListener {
-            Log.e("TEST: ", "onClick ${records[holder.layoutPosition].title}")
-        }
 
         holder.itemView.info.setOnClickListener {
             holder.itemView.info.text = "info was clicked"
