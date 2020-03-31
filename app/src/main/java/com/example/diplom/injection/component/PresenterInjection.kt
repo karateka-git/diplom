@@ -5,6 +5,7 @@ import com.example.diplom.injection.module.RecordsAdapterModule
 import com.example.diplom.injection.module.ContextModule
 import com.example.diplom.injection.module.PresenterModule
 import com.example.diplom.ui.main.MainPresenter
+import com.example.diplom.ui.record.RecordPresenter
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -20,6 +21,8 @@ interface PresenterInjector {
      * @param mainPresenter MainPresenter in which to inject the dependencies
      */
     fun inject(mainPresenter: MainPresenter)
+
+    fun inject(recordPresenter: RecordPresenter)
 
     @Component.Builder
     interface Builder {

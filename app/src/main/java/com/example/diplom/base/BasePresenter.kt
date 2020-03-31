@@ -6,6 +6,7 @@ import com.example.diplom.injection.module.RecordsAdapterModule
 import com.example.diplom.injection.module.ContextModule
 import com.example.diplom.injection.module.PresenterModule
 import com.example.diplom.ui.main.MainPresenter
+import com.example.diplom.ui.record.RecordPresenter
 
 /**
  * Base presenter any presenter of the application must extend. It provides initial injections and
@@ -45,6 +46,7 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
     private fun inject() {
         when (this) {
             is MainPresenter -> injector.inject(this)
+            is RecordPresenter -> injector.inject(this)
         }
     }
 }

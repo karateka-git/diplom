@@ -16,6 +16,8 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     @Inject
     lateinit var calendar: MyCalendar
 
+    private val values = mutableListOf<Record>()
+
     override fun onViewCreated() {
         super.onViewCreated()
         view.setRecords(generateFakeRecords())
@@ -23,7 +25,6 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     }
 
     private fun generateFakeRecords(): List<Record> {
-        val values = mutableListOf<Record>()
         for (i in 0 until 30) {
             values.add(Record(Date(), "test$i", "test$i tester$i testers$i"))
         }
@@ -31,15 +32,10 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     }
 
     fun datePickerDialog() {
-        val year = calendar.year
-        val month = calendar.month
-        val day = calendar.day
+        calendar.showDatePicker(context, view::setDate)
+    }
 
-        val callback = DatePickerDialog.OnDateSetListener{  v, y, m, d ->
-            calendar.newDate(d,m,y)
-            view.setDate(calendar.toString())
-        }
-
-        DatePickerDialog(context, callback, year, month, day).show()
+    fun getRecord(position: Int): Record {
+        return values[position]
     }
 }

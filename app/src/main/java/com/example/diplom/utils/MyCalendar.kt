@@ -1,8 +1,11 @@
 package com.example.diplom.utils
 
+import android.app.DatePickerDialog
+import android.content.Context
+import com.example.diplom.base.BaseView
 import java.util.*
 
-class MyCalendar() {
+class MyCalendar {
     private val calendar = Calendar.getInstance()
     var year = calendar.get(Calendar.YEAR)
         private set
@@ -15,6 +18,16 @@ class MyCalendar() {
         this.day = day
         this.month = month
         this.year = year
+    }
+
+    fun showDatePicker(context: Context, callback: (date: String) -> Unit ) {
+
+        val callback_wrap = DatePickerDialog.OnDateSetListener{ v, y, m, d ->
+            newDate(d,m,y)
+            callback(this.toString())
+        }
+
+        DatePickerDialog(context, callback_wrap, year, month, day).show()
     }
 
     override fun toString(): String {

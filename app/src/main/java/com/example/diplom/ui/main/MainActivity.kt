@@ -59,6 +59,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
 
     override fun onRecordClick(position: Int) {
         val intent: Intent = Intent(this, RecordActivity::class.java)
+        intent.putExtra(Record::class.java.simpleName, presenter.getRecord(position))
         startActivity(intent)
     }
 }
