@@ -2,6 +2,7 @@ package com.example.diplom.injection.module
 
 import android.app.Application
 import android.content.Context
+import com.example.diplom.MyApplication
 import com.example.diplom.base.BaseView
 import dagger.Module
 import dagger.Provides
@@ -30,7 +31,7 @@ object ContextModule {
      */
     @Provides
     @JvmStatic
-    internal fun provideApplication(context: Context): Application {
-        return context.applicationContext as Application
+    internal fun provideApplication(context: Context): MyApplication {
+        return context.applicationContext as MyApplication
     }
 }

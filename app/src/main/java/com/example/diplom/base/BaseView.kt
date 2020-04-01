@@ -1,6 +1,7 @@
 package com.example.diplom.base
 
 import android.content.Context
+import android.os.Bundle
 
 
 /**
@@ -12,4 +13,6 @@ interface BaseView {
      * @return the context in which the application is running
      */
     fun getContext() : Context
+
+    fun getBundle() : Bundle?
 }

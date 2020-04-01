@@ -1,7 +1,6 @@
 package com.example.diplom.injection.component
 
 import com.example.diplom.base.BaseView
-import com.example.diplom.injection.module.RecordsAdapterModule
 import com.example.diplom.injection.module.ContextModule
 import com.example.diplom.injection.module.PresenterModule
 import com.example.diplom.ui.main.MainPresenter

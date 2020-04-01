@@ -5,7 +5,6 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-@Suppress("unused")
 object PresenterModule {
     @Provides
     @JvmStatic

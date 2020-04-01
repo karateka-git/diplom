@@ -20,4 +20,8 @@ abstract class BaseActivity<P : BasePresenter<BaseView>> : BaseView, AppCompatAc
     override fun getContext(): Context {
         return this
     }
+
+    override fun getBundle(): Bundle? {
+        return null
+    }
 }

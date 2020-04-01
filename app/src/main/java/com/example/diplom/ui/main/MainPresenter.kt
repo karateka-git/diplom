@@ -1,10 +1,13 @@
 package com.example.diplom.ui.main
 
+import android.app.Application
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.DatePicker
+import com.example.diplom.MyApplication
 import com.example.diplom.base.BasePresenter
 import com.example.diplom.model.Record
+import com.example.diplom.repository.UniversityClassesRepository
 import com.example.diplom.utils.MyCalendar
 import java.util.*
 import javax.inject.Inject
@@ -16,19 +19,16 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     @Inject
     lateinit var calendar: MyCalendar
 
-    private val values = mutableListOf<Record>()
+    @Inject
+    lateinit var application: MyApplication
+
+    lateinit var universityClassesRepository: UniversityClassesRepository
 
     override fun onViewCreated() {
         super.onViewCreated()
-        view.setRecords(generateFakeRecords())
+        universityClassesRepository = this.application.component.getUniversityRepository()
+        view.setRecords(universityClassesRepository.getAll())
         view.setDate(calendar.toString())
-    }
-
-    private fun generateFakeRecords(): List<Record> {
-        for (i in 0 until 30) {
-            values.add(Record(Date(), "test$i", "test$i tester$i testers$i"))
-        }
-        return values
     }
 
     fun datePickerDialog() {
@@ -36,6 +36,6 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     }
 
     fun getRecord(position: Int): Record {
-        return values[position]
+        return universityClassesRepository.get(position)
     }
 }

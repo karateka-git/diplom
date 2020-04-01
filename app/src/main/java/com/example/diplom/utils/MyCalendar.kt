@@ -22,7 +22,7 @@ class MyCalendar {
 
     fun showDatePicker(context: Context, callback: (date: String) -> Unit ) {
 
-        val callback_wrap = DatePickerDialog.OnDateSetListener{ v, y, m, d ->
+        val callback_wrap = DatePickerDialog.OnDateSetListener{ _, y, m, d ->
             newDate(d,m,y)
             callback(this.toString())
         }

@@ -2,7 +2,6 @@ package com.example.diplom.base
 
 import com.example.diplom.injection.component.DaggerPresenterInjector
 import com.example.diplom.injection.component.PresenterInjector
-import com.example.diplom.injection.module.RecordsAdapterModule
 import com.example.diplom.injection.module.ContextModule
 import com.example.diplom.injection.module.PresenterModule
 import com.example.diplom.ui.main.MainPresenter

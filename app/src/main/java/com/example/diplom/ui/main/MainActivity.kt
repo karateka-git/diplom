@@ -38,7 +38,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         return MainPresenter(this)
     }
 
-    fun initAdapter() {
+    private fun initAdapter() {
         records.layoutManager = LinearLayoutManager(this)
         records.adapter = recordsAdapter
     }
