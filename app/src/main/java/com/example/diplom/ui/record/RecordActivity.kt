@@ -17,13 +17,14 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val arguments = intent.extras
-        if (arguments != null) {
-            val record = arguments.getSerializable(Record::class.java.simpleName) as Record
-            binding = DataBindingUtil.setContentView<ActivityRecordBinding>(this, R.layout.activity_record)
-            binding.record = record
-        }
-
         presenter.onViewCreated()
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_record)
+        binding.record = if (arguments != null) {
+            arguments.getSerializable(Record::class.java.simpleName) as Record
+        } else {
+            presenter.getEmptyRecord()
+        }
 
         initOnClickListener()
     }

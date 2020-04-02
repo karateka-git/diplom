@@ -49,8 +49,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     }
 
     private fun initOnClickListener() {
-        date.setOnClickListener{
+        date.setOnClickListener {
             presenter.datePickerDialog()
+        }
+        add.setOnClickListener {
+            val intent = Intent(this, RecordActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -33,13 +33,20 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
         calendar.showDatePicker(context, view::setDate)
     }
 
+    fun getEmptyRecord(): Record {
+        return universityClassesRepository.createRecord()
+    }
+
     fun clickButtonOk() {
         val binding = view.getBinding()
         //TODO Check Record field
-        val id = binding.record?.id
+        val id = binding.record!!.id
         val record = Record(
-            id!!,
-            binding.date.text.toString(), binding.title.text.toString(), binding.info.text.toString())
+            id,
+            binding.date.text.toString(),
+            binding.title.text.toString(),
+            binding.info.text.toString()
+        )
         universityClassesRepository.update(record)
         view.clickButtonOk()
     }

@@ -8,10 +8,19 @@ import javax.inject.Singleton
 class UniversityClassesRepository : IRepository {
     private val values = mutableMapOf<UUID, Record>() //TODO change Collection
     init {
-        for (i in 0 until 30) {
+        for (i in 0 until 10) {
             val uuid = UUID.randomUUID()
             values[uuid] = Record(uuid, Date().toString(), "test$i", "test$i tester$i testers$i")
         }
+    }
+
+    fun createRecord(): Record {
+        return Record(
+            UUID.randomUUID(),
+            "",
+            "",
+            ""
+        )
     }
 
     fun get(id: UUID): Record? {
@@ -19,7 +28,7 @@ class UniversityClassesRepository : IRepository {
     }
 
     fun set(record: Record) {
-        values.put(record.id, record)
+        values[record.id] = record
     }
 
     fun update(record: Record) {
