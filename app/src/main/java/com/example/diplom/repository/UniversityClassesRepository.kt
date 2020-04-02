@@ -17,7 +17,7 @@ class UniversityClassesRepository : IRepository {
     fun createRecord(): Record {
         return Record(
             UUID.randomUUID(),
-            "",
+            Date().toString(),
             "",
             ""
         )

@@ -48,6 +48,9 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
         this.button_ok.setOnClickListener{
             presenter.clickButtonOk()
         }
+        this.button_cancel.setOnClickListener{
+            finish()
+        }
     }
 
     override fun setDate(date: String) {
