@@ -10,12 +10,13 @@ import com.example.diplom.R
 import com.example.diplom.databinding.RecordBinding
 import com.example.diplom.model.Record
 import kotlinx.android.synthetic.main.record.view.*
+import java.util.*
 
 class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
     /**
      * The list of posts of the adapter
      */
-    private var records: Map<Int, Record> = mapOf()
+    private var records: List<Record> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -40,10 +41,10 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
         holder.itemView.info.setOnClickListener {
             holder.itemView.info.text = "info was clicked"
         }
-        holder.bind(records[holder.adapterPosition] ?: error("Records not found"))
+        holder.bind(records[holder.adapterPosition])
     }
 
-    fun updateRecords(records: Map<Int, Record>) {
+    fun updateRecords(records: List<Record>) {
         this.records = records
     }
 
@@ -61,7 +62,7 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
                                 RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener{
-                listener.onRecordClick(records[adapterPosition] ?: error("Records not found"))
+                listener.onRecordClick(records[adapterPosition])
             }
         }
 

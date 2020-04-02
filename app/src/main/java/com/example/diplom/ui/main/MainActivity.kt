@@ -11,6 +11,7 @@ import com.example.diplom.model.Record
 import com.example.diplom.ui.record.RecordActivity
 import com.example.diplom.utils.adapters.RecordsAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnRecordListener {
@@ -43,8 +44,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         records.adapter = recordsAdapter
     }
 
-    override fun setRecords(records: Map<Int, Record>) {
-        recordsAdapter.updateRecords(records)
+    override fun setRecords(records: Map<UUID, Record>) {
+        recordsAdapter.updateRecords(records.values.toList())
     }
 
     private fun initOnClickListener() {
