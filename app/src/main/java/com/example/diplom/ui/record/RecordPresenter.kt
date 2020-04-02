@@ -1,22 +1,12 @@
 package com.example.diplom.ui.record
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.os.Bundle
-import android.view.ContextThemeWrapper
-import android.view.View
 import android.widget.EditText
 import com.example.diplom.MyApplication
-import com.example.diplom.R
 import com.example.diplom.base.BasePresenter
-import com.example.diplom.databinding.ActivityRecordBinding
 import com.example.diplom.model.Record
-import com.example.diplom.repository.UniversityClassesRepository
+import com.example.diplom.repository.UniversityRecordsRepository
 import com.example.diplom.utils.MyCalendar
-import java.lang.IllegalArgumentException
-import java.text.FieldPosition
-import java.util.*
 import javax.inject.Inject
 
 class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView)  {
@@ -29,11 +19,11 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
     @Inject
     lateinit var application: MyApplication
 
-    lateinit var universityClassesRepository: UniversityClassesRepository
+    lateinit var universityRecordsRepository: UniversityRecordsRepository
 
     override fun onViewCreated() {
         super.onViewCreated()
-        universityClassesRepository = this.application.component.getUniversityRepository()
+        universityRecordsRepository = this.application.component.getUniversityRepository()
     }
 
     fun datePickerDialog() {
@@ -41,7 +31,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
     }
 
     fun getEmptyRecord(): Record {
-        return universityClassesRepository.createRecord()
+        return universityRecordsRepository.createRecord()
     }
 
     private fun validateField(view: EditText): Boolean {
@@ -70,7 +60,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
             binding.info.text.toString()
         )
 
-        universityClassesRepository.update(record)
+        universityRecordsRepository.update(record)
         view.clickButtonOk()
     }
 }

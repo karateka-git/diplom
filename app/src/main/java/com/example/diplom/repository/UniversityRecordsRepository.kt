@@ -5,7 +5,7 @@ import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class UniversityClassesRepository : IRepository {
+class UniversityRecordsRepository : IRepository {
     private val values = mutableMapOf<UUID, Record>() //TODO change Collection
     init {
         for (i in 0 until 10) {
