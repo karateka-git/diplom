@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.diplom">
+    package="com.example.diploma">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -20,13 +20,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        android:name=".MyApplication">
+        android:name="com.example.diploma.MyApplication">
 
-        <activity android:name=".ui.record.RecordActivity"></activity>
+        <activity android:name="com.example.diploma.ui.record.RecordActivity"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.diplom"
+            android:authorities="com.example.diploma"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -38,7 +38,7 @@
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
         <!-- </activity> -->
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name="com.example.diploma.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

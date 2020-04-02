@@ -6,7 +6,7 @@
     <data>
         <variable
             name="record"
-            type="com.example.diplom.model.Record" />
+            type="com.example.diploma.model.Record" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
