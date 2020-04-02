@@ -43,7 +43,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         records.adapter = recordsAdapter
     }
 
-    override fun setRecords(records: List<Record>) {
+    override fun setRecords(records: Map<Int, Record>) {
         recordsAdapter.updateRecords(records)
     }
 
@@ -57,9 +57,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         this.date.text = date
     }
 
-    override fun onRecordClick(position: Int) {
-        val intent: Intent = Intent(this, RecordActivity::class.java)
-        intent.putExtra(Record::class.java.simpleName, presenter.getRecord(position))
+    override fun onRecordClick(record: Record) {
+        val intent = Intent(this, RecordActivity::class.java)
+        intent.putExtra(Record::class.java.simpleName, record)
         startActivity(intent)
     }
 }

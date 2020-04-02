@@ -5,6 +5,6 @@ import com.example.diplom.model.Record
 import com.example.diplom.utils.adapters.RecordsAdapter
 
 interface MainView : BaseView {
-    fun setRecords(records: List<Record>)
+    fun setRecords(records: Map<Int, Record>)
     fun setDate(date: String)
 }

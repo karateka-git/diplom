@@ -15,7 +15,7 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
     /**
      * The list of posts of the adapter
      */
-    private var records: List<Record> = listOf()
+    private var records: Map<Int, Record> = mapOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -40,7 +40,15 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
         holder.itemView.info.setOnClickListener {
             holder.itemView.info.text = "info was clicked"
         }
-        holder.bind(records[holder.adapterPosition])
+        holder.bind(records[holder.adapterPosition] ?: error("Records not found"))
+    }
+
+    fun updateRecords(records: Map<Int, Record>) {
+        this.records = records
+    }
+
+    interface OnRecordListener {
+        fun onRecordClick(record: Record)
     }
 
 
@@ -48,12 +56,12 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
      * The ViewHolder of the adapter
      * @property binding the DataBinging object for Post item
      */
-    class RecordsViewHolder(private val binding: RecordBinding,
+    inner class RecordsViewHolder(private val binding: RecordBinding,
                             private val listener: OnRecordListener):
                                 RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener{
-                listener.onRecordClick(adapterPosition)
+                listener.onRecordClick(records[adapterPosition] ?: error("Records not found"))
             }
         }
 
@@ -64,13 +72,5 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
             binding.record = record
             binding.executePendingBindings()
         }
-    }
-
-    fun updateRecords(records: List<Record>) {
-        this.records = records
-    }
-
-    interface OnRecordListener {
-        fun onRecordClick(position: Int)
     }
 }

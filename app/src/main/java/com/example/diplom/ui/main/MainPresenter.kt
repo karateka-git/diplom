@@ -34,8 +34,4 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     fun datePickerDialog() {
         calendar.showDatePicker(context, view::setDate)
     }
-
-    fun getRecord(position: Int): Record {
-        return universityClassesRepository.get(position)
-    }
 }
