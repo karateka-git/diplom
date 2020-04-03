@@ -10,6 +10,7 @@ import com.example.diploma.model.Record
 import com.example.diploma.ui.record.RecordActivity
 import com.example.diploma.utils.adapters.RecordsAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(toolbar_actionbar)
         DaggerMainActivityInjector
             .builder()
             .listener(this)
