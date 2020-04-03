@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,8 +12,10 @@ import com.example.diploma.R
 import com.example.diploma.databinding.RecordBinding
 import com.example.diploma.model.Record
 import com.example.diploma.repository.DailyRecordsRepository
+import com.example.diploma.repository.IRepository
 import kotlinx.android.synthetic.main.record.view.*
 
+@Suppress("DUPLICATE_LABEL_IN_WHEN")
 class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
     /**
      * The list of posts of the adapter
@@ -74,12 +77,12 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
          */
         fun bind(record: Record) {
             binding.record = record
-            binding.root.setBackgroundColor(context.resources.getColor(
+            binding.root.setBackgroundColor(ContextCompat.getColor(context,
                 when (record.type) {
-                    "daily" -> {
+                    IRepository.dailyRecordsRepository -> {
                         R.color.colorDailyRecord
                     }
-                    "university" -> {
+                    IRepository.universityRecordsRepository -> {
                         R.color.colorUniversityRecord
                     }
                     else -> {

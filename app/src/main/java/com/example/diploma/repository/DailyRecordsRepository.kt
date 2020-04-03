@@ -4,7 +4,7 @@ import com.example.diploma.model.Record
 import java.util.*
 
 class DailyRecordsRepository : IRepository  {
-    private val repositoryType = "daily"
+    private val repositoryType = IRepository.dailyRecordsRepository
     private val values = mutableMapOf<UUID, Record>()
 
     override fun getEmptyRecord(): Record {

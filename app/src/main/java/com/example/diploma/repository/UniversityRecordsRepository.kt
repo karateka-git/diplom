@@ -4,7 +4,7 @@ import com.example.diploma.model.Record
 import java.util.*
 
 class UniversityRecordsRepository : IRepository {
-    private val repositoryType = "university"
+    private val repositoryType = IRepository.universityRecordsRepository
     private val values = mutableMapOf<UUID, Record>()
 
     init {
