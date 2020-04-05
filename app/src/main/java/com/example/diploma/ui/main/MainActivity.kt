@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diploma.R
 import com.example.diploma.base.BaseActivity
@@ -17,6 +16,7 @@ import com.example.diploma.utils.adapters.RecordsAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_all_records.*
 import kotlinx.android.synthetic.main.activity_main_drawer.*
+import kotlinx.android.synthetic.main.bottom_navigation.*
 import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 import javax.inject.Inject
@@ -70,9 +70,15 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         date.setOnClickListener {
             presenter.datePickerDialog()
         }
-        add.setOnClickListener {
+        fab.setOnClickListener {
             val intent = Intent(this, RecordActivity::class.java)
             startActivity(intent)
+        }
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.app_bar_fav -> Toast.makeText(this, "Fav", Toast.LENGTH_SHORT).show()
+            }
+            true
         }
     }
 
