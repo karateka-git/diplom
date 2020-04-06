@@ -3,6 +3,10 @@ package com.example.diploma.ui.main
 import android.content.Context
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
+import com.example.diploma.model.Record
+import com.example.diploma.repository.DailyRecordsRepository
+import com.example.diploma.repository.HolidayRecordsRepository
+import com.example.diploma.repository.IRepository
 import com.example.diploma.repository.UniversityRecordsRepository
 import com.example.diploma.utils.MyCalendar
 import javax.inject.Inject
@@ -19,11 +23,24 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
 
     lateinit var universityRecordsRepository: UniversityRecordsRepository
 
+    lateinit var dailyRecordsRepository: DailyRecordsRepository
+
+    lateinit var holidayRecordsRepository: HolidayRecordsRepository
+
     override fun onViewCreated() {
         super.onViewCreated()
         universityRecordsRepository = this.application.component.getUniversityRepository()
-        view.setRecords(universityRecordsRepository.getAll())
+        dailyRecordsRepository = this.application.component.getDailyRepository()
+        holidayRecordsRepository = this.application.component.getHolidayRepository()
+        val mapper = getValues(universityRecordsRepository)
+            .plus(getValues(dailyRecordsRepository))
+            .plus(getValues(holidayRecordsRepository))
+        view.setRecords(mapper)
         view.setDate(calendar.toString())
+    }
+
+    private fun getValues(repository: IRepository): Collection<Record> {
+        return repository.valuesMap.values
     }
 
     fun datePickerDialog() {

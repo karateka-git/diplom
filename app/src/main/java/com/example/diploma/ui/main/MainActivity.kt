@@ -62,8 +62,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    override fun setRecords(records: Map<UUID, Record>) {
-        recordsAdapter.updateRecords(records.values.toList())
+    override fun setRecords(records: List<Record>) {
+        recordsAdapter.updateRecords(records)
     }
 
     private fun initOnClickListener() {
@@ -76,7 +76,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         }
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.app_bar_fav -> Toast.makeText(this, "Fav", Toast.LENGTH_SHORT).show()
+                R.id.all_records -> Toast.makeText(this, "Fav", Toast.LENGTH_SHORT).show()
             }
             true
         }

@@ -20,13 +20,10 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
     @Inject
     lateinit var application: MyApplication
 
-    private lateinit var universityRecordsRepository: UniversityRecordsRepository
-
     private lateinit var dailyRecordsRepository: DailyRecordsRepository
 
     override fun onViewCreated() {
         super.onViewCreated()
-        universityRecordsRepository = this.application.component.getUniversityRepository()
         dailyRecordsRepository = this.application.component.getDailyRepository()
     }
 
@@ -35,7 +32,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
     }
 
     fun getEmptyRecord(): Record {
-        return universityRecordsRepository.getEmptyRecord()
+        return dailyRecordsRepository.getEmptyRecord()
     }
 
     private fun validateField(view: EditText): Boolean {
@@ -63,7 +60,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
             binding.info.text.toString()
         )
 
-        universityRecordsRepository.update(record)
+        dailyRecordsRepository.update(record)
         view.clickButtonOk()
     }
 }

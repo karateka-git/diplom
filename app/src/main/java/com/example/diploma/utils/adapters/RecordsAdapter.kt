@@ -15,7 +15,6 @@ import com.example.diploma.repository.DailyRecordsRepository
 import com.example.diploma.repository.IRepository
 import kotlinx.android.synthetic.main.record.view.*
 
-@Suppress("DUPLICATE_LABEL_IN_WHEN")
 class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
     /**
      * The list of posts of the adapter
@@ -57,7 +56,6 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
         fun onRecordClick(record: Record)
     }
 
-
     /**
      * The ViewHolder of the adapter
      * @property binding the DataBinging object for Post item
@@ -84,6 +82,9 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
                     }
                     IRepository.universityRecordsRepository -> {
                         R.color.colorUniversityRecord
+                    }
+                    IRepository.holidayRecordsRepository -> {
+                        R.color.colorHolidayRecord
                     }
                     else -> {
                         R.color.colorAccent

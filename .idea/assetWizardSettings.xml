@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -28,9 +33,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_add_white_24" />
-                            <entry key="sourceFile" value="C:\Users\COMPADRE" />
+                            <entry key="outputName" value="ic_add_black_24" />
+                            <entry key="sourceFile" value="D:\Project\diplom_download\add-black-24dp.svg" />
                           </map>
                         </option>
                       </PersistentState>

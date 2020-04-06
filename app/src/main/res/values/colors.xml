@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorUniversityRecord">#594AED</color>
     <color name="colorDailyRecord">#4AEDE5</color>
+    <color name="colorHolidayRecord">#349213</color>
 </resources>

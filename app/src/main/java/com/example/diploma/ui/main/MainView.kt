@@ -5,6 +5,6 @@ import com.example.diploma.model.Record
 import java.util.*
 
 interface MainView : BaseView {
-    fun setRecords(records: Map<UUID, Record>)
+    fun setRecords(records: List<Record>)
     fun setDate(date: String)
 }
