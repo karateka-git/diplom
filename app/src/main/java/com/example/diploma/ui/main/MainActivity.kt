@@ -12,6 +12,7 @@ import com.example.diploma.base.BaseActivity
 import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
 import com.example.diploma.ui.record.RecordActivity
+import com.example.diploma.utils.ParserXML
 import com.example.diploma.utils.adapters.RecordsAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_all_records.*
@@ -41,6 +42,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         presenter.onViewCreated()
 
         initOnClickListener()
+
+        val parser = ParserXML(this)
+        parser.getParse()
     }
 
     override fun instantiatePresenter(): MainPresenter {
