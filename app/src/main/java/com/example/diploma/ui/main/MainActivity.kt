@@ -12,6 +12,7 @@ import com.example.diploma.base.BaseActivity
 import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
 import com.example.diploma.ui.record.RecordActivity
+import com.example.diploma.utils.DownloadData
 import com.example.diploma.utils.ParserXML
 import com.example.diploma.utils.adapters.RecordsAdapter
 import com.google.android.material.navigation.NavigationView
@@ -19,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_all_records.*
 import kotlinx.android.synthetic.main.activity_main_drawer.*
 import kotlinx.android.synthetic.main.bottom_navigation.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject
 
@@ -43,8 +45,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
 
         initOnClickListener()
 
-        val parser = ParserXML(this)
-        parser.getParse()
+        val downloadData = DownloadData()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            downloadData.process()
+        }
     }
 
     override fun instantiatePresenter(): MainPresenter {
