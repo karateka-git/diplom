@@ -10,13 +10,10 @@ import org.w3c.dom.Element
 import org.w3c.dom.Node
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
-import java.io.IOException
-import java.io.InputStream
-import java.net.MalformedURLException
 import javax.xml.parsers.DocumentBuilderFactory
 
-class XmlTimeTablingRepository() : ITimeTablingRepository {
-    private val receiverXML: IReceiverXml = ReceiverXmlFromURL()
+class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTablingRepository {
+//    private val receiverXML: IReceiverXml = ReceiverXmlFromURL()
     private val parser: XmlPullParser
     private lateinit var parserDOM: Document
     init {
@@ -36,8 +33,7 @@ class XmlTimeTablingRepository() : ITimeTablingRepository {
             }
     }
 
-    @Throws(CustomException::class)
-    fun getTeacher(): Map<String, String> =
+    override fun getTeacher(): Map<String, String> =
         setInput {
             val result = mutableMapOf<String, String>()
             parserDOM.documentElement.normalize()

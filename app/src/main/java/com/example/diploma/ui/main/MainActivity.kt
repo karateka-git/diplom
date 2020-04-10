@@ -43,17 +43,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         presenter.onViewCreated()
 
         initOnClickListener()
-
-        val tabling = XmlTimeTablingRepository()
-        try {
-            val answer: Map<String, String> = tabling.getTeacher()
-            Log.e("Teacher_size", answer.size.toString())
-            for ((key, value) in answer) {
-                Log.e("Teacher_main", value)
-            }
-        } catch(e: CustomException) {
-            Log.e("Exception", "${e.message}")
-        }
     }
 
     override fun instantiatePresenter(): MainPresenter {

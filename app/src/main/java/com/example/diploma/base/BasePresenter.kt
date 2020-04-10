@@ -4,6 +4,7 @@ import com.example.diploma.injection.component.DaggerPresenterInjector
 import com.example.diploma.injection.component.PresenterInjector
 import com.example.diploma.injection.module.ContextModule
 import com.example.diploma.injection.module.PresenterModule
+import com.example.diploma.injection.module.TimeTablingModule
 import com.example.diploma.ui.main.MainPresenter
 import com.example.diploma.ui.record.RecordPresenter
 
@@ -23,6 +24,7 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
         .baseView(view)
         .contextModule(ContextModule)
         .presenterModule(PresenterModule)
+        .timeTablingModule(TimeTablingModule)
         .build()
 
     init {
