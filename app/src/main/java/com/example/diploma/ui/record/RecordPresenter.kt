@@ -5,8 +5,7 @@ import android.widget.EditText
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
 import com.example.diploma.model.Record
-import com.example.diploma.repository.DailyRecordsRepository
-import com.example.diploma.repository.UniversityRecordsRepository
+import com.example.diploma.repository.records.DailyRecordsRepository
 import com.example.diploma.utils.MyCalendar
 import javax.inject.Inject
 

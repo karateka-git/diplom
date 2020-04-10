@@ -1,9 +1,9 @@
-package com.example.diploma.repository
+package com.example.diploma.repository.records
 
 import com.example.diploma.model.Record
 import java.util.*
 
-interface IRepository {
+interface IRecordsRepository {
     companion object {
         const val default = "default"
         const val dailyRecordsRepository = "daily"

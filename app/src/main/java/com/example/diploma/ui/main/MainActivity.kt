@@ -2,6 +2,7 @@ package com.example.diploma.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -11,17 +12,15 @@ import com.example.diploma.R
 import com.example.diploma.base.BaseActivity
 import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
+import com.example.diploma.repository.time_tabling.XmlTimeTablingRepository
 import com.example.diploma.ui.record.RecordActivity
-import com.example.diploma.utils.DownloadData
-import com.example.diploma.utils.ParserXML
+import com.example.diploma.utils.CustomException
 import com.example.diploma.utils.adapters.RecordsAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_all_records.*
 import kotlinx.android.synthetic.main.activity_main_drawer.*
 import kotlinx.android.synthetic.main.bottom_navigation.*
 import kotlinx.android.synthetic.main.toolbar.*
-import kotlinx.coroutines.*
-import java.util.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnRecordListener,
@@ -45,10 +44,15 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
 
         initOnClickListener()
 
-        val downloadData = DownloadData()
-
-        CoroutineScope(Dispatchers.Main).launch {
-            downloadData.process()
+        val tabling = XmlTimeTablingRepository()
+        try {
+            val answer: Map<String, String> = tabling.getTeacher()
+            Log.e("Teacher_size", answer.size.toString())
+            for ((key, value) in answer) {
+                Log.e("Teacher_main", value)
+            }
+        } catch(e: CustomException) {
+            Log.e("Exception", "${e.message}")
         }
     }
 

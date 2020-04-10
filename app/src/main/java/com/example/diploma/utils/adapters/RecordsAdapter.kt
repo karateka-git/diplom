@@ -1,18 +1,14 @@
 package com.example.diploma.utils.adapters
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diploma.R
 import com.example.diploma.databinding.RecordBinding
 import com.example.diploma.model.Record
-import com.example.diploma.repository.DailyRecordsRepository
-import com.example.diploma.repository.IRepository
+import com.example.diploma.repository.records.IRecordsRepository
 import kotlinx.android.synthetic.main.record.view.*
 
 class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
@@ -77,13 +73,13 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
             binding.record = record
             binding.root.setBackgroundColor(ContextCompat.getColor(context,
                 when (record.type) {
-                    IRepository.dailyRecordsRepository -> {
+                    IRecordsRepository.dailyRecordsRepository -> {
                         R.color.colorDailyRecord
                     }
-                    IRepository.universityRecordsRepository -> {
+                    IRecordsRepository.universityRecordsRepository -> {
                         R.color.colorUniversityRecord
                     }
-                    IRepository.holidayRecordsRepository -> {
+                    IRecordsRepository.holidayRecordsRepository -> {
                         R.color.colorHolidayRecord
                     }
                     else -> {

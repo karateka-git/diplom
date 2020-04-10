@@ -1,12 +1,13 @@
-package com.example.diploma.repository
+package com.example.diploma.repository.records
 
 import com.example.diploma.model.Record
 import java.util.*
 
-class UniversityRecordsRepository : IRepository {
+class UniversityRecordsRepository :
+    IRecordsRepository {
     override val valuesMap = mutableMapOf<UUID, Record>()
     override val type: String
-        get() = IRepository.universityRecordsRepository
+        get() = IRecordsRepository.universityRecordsRepository
 
     init {
         for (i in 0 until 10) {
