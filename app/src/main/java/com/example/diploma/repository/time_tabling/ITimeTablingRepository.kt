@@ -7,5 +7,11 @@ interface ITimeTablingRepository {
      * @return teachers::map<index, name>
      */
     @Throws(CustomException::class)
-    fun getTeacher(): Map<String, String>
+    fun getTeachers(): Map<String, String>
+
+    @Throws(CustomException::class)
+    fun getDate(): Map<String, String>
+
+    @Throws(CustomException::class)
+    fun getSchedule(): Map<String, String>
 }

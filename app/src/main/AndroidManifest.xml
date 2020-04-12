@@ -35,6 +35,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.diploma.ui.record.RecordActivity" />
+        <activity android:name=".ui.login.LoginActivity" />
     </application>
 
 </manifest>

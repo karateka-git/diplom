@@ -1,9 +1,11 @@
 package com.example.diploma.injection.component
 
 import com.example.diploma.injection.module.ApplicationModule
+import com.example.diploma.injection.module.ContextModule
 import com.example.diploma.repository.records.DailyRecordsRepository
 import com.example.diploma.repository.records.HolidayRecordsRepository
 import com.example.diploma.repository.records.UniversityRecordsRepository
+import com.example.diploma.ui.main.MainPresenter
 import dagger.Component
 import javax.inject.Singleton
 

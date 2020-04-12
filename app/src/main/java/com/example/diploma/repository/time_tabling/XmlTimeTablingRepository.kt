@@ -13,7 +13,6 @@ import org.xmlpull.v1.XmlPullParserFactory
 import javax.xml.parsers.DocumentBuilderFactory
 
 class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTablingRepository {
-//    private val receiverXML: IReceiverXml = ReceiverXmlFromURL()
     private val parser: XmlPullParser
     private lateinit var parserDOM: Document
     init {
@@ -33,7 +32,7 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
             }
     }
 
-    override fun getTeacher(): Map<String, String> =
+    override fun getTeachers(): Map<String, String> =
         setInput {
             val result = mutableMapOf<String, String>()
             parserDOM.documentElement.normalize()
@@ -52,4 +51,12 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
             }
             result
         }
+
+    override fun getDate(): Map<String, String> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getSchedule(): Map<String, String> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

@@ -13,6 +13,7 @@ import com.example.diploma.base.BaseActivity
 import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
 import com.example.diploma.repository.time_tabling.XmlTimeTablingRepository
+import com.example.diploma.ui.login.LoginActivity
 import com.example.diploma.ui.record.RecordActivity
 import com.example.diploma.utils.CustomException
 import com.example.diploma.utils.adapters.RecordsAdapter
@@ -79,6 +80,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.all_records -> Toast.makeText(this, "Fav", Toast.LENGTH_SHORT).show()
+            }
+            true
+        }
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.nav_update -> startActivity(Intent(this, LoginActivity::class.java))
             }
             true
         }

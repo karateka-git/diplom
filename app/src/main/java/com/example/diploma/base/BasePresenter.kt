@@ -5,6 +5,7 @@ import com.example.diploma.injection.component.PresenterInjector
 import com.example.diploma.injection.module.ContextModule
 import com.example.diploma.injection.module.PresenterModule
 import com.example.diploma.injection.module.TimeTablingModule
+import com.example.diploma.ui.login.LoginPresenter
 import com.example.diploma.ui.main.MainPresenter
 import com.example.diploma.ui.record.RecordPresenter
 
@@ -48,6 +49,7 @@ abstract class BasePresenter<out V : BaseView>(protected val view: V) {
         when (this) {
             is MainPresenter -> injector.inject(this)
             is RecordPresenter -> injector.inject(this)
+            is LoginPresenter -> injector.inject(this)
         }
     }
 }
