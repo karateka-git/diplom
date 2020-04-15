@@ -34,11 +34,19 @@ interface IRecordsRepository {
         valuesMap[record.id] = record
     }
 
+    fun setAll(records: Map<UUID, Record>) {
+        valuesMap.putAll(records)
+    }
+
     fun update(record: Record) {
         valuesMap[record.id] = record
     }
 
     fun size(): Int {
         return valuesMap.size
+    }
+
+    fun clearRepository() {
+        valuesMap.clear()
     }
 }

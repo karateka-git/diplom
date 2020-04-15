@@ -1,4 +1,4 @@
-package com.example.diploma.utils
+package com.example.diploma.utils.exception
 
 import java.lang.Exception
 

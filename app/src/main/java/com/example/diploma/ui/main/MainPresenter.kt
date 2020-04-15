@@ -1,7 +1,6 @@
 package com.example.diploma.ui.main
 
 import android.content.Context
-import android.util.Log
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
 import com.example.diploma.model.Record
@@ -9,12 +8,7 @@ import com.example.diploma.repository.records.DailyRecordsRepository
 import com.example.diploma.repository.records.HolidayRecordsRepository
 import com.example.diploma.repository.records.IRecordsRepository
 import com.example.diploma.repository.records.UniversityRecordsRepository
-import com.example.diploma.repository.time_tabling.ITimeTablingRepository
-import com.example.diploma.repository.time_tabling.XmlTimeTablingRepository
-import com.example.diploma.utils.CustomException
 import com.example.diploma.utils.MyCalendar
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {

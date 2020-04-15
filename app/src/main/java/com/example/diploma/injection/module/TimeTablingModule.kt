@@ -1,5 +1,6 @@
 package com.example.diploma.injection.module
 
+import android.content.Context
 import com.example.diploma.repository.time_tabling.ITimeTablingRepository
 import com.example.diploma.repository.time_tabling.XmlTimeTablingRepository
 import com.example.diploma.utils.receiver_xml.IReceiverXml
@@ -17,7 +18,7 @@ object TimeTablingModule {
 
     @Provides
     @JvmStatic
-    fun provideReceiverXML(): IReceiverXml {
-        return ReceiverXmlFromURL()
+    fun provideReceiverXML(context: Context): IReceiverXml {
+        return ReceiverXmlFromURL(context)
     }
 }
