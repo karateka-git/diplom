@@ -95,7 +95,7 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
                         Log.e(
                             "schedule", "${record.title} ${record.info}"
                         )
-                        result[record.id] = record
+                        result[record.uuid] = record
                     }
 
                 }

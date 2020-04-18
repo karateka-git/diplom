@@ -45,7 +45,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
 
     fun clickButtonOk() {
         val binding = view.getBinding()
-        val id = binding.record!!.id
+        val id = binding.record!!.uuid
         if (
             !validateField(binding.title) or
             !validateField(binding.info)

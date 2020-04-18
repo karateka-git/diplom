@@ -1,5 +1,8 @@
 package com.example.diploma.injection.module
 
+import android.content.Context
+import androidx.room.Room
+import com.example.diploma.db.AppDatabase
 import com.example.diploma.repository.records.DailyRecordsRepository
 import com.example.diploma.repository.records.HolidayRecordsRepository
 import com.example.diploma.repository.records.UniversityRecordsRepository
@@ -19,8 +22,8 @@ object ApplicationModule {
     @Singleton
     @Provides
     @JvmStatic
-    fun provideDailyRecordsRepository(): DailyRecordsRepository {
-        return DailyRecordsRepository()
+    fun provideDailyRecordsRepository(appDatabase: AppDatabase): DailyRecordsRepository {
+        return DailyRecordsRepository(appDatabase)
     }
 
     @Singleton
@@ -28,5 +31,12 @@ object ApplicationModule {
     @JvmStatic
     fun provideHolidayRecordsRepository(): HolidayRecordsRepository {
         return HolidayRecordsRepository()
+    }
+
+    @Singleton
+    @Provides
+    @JvmStatic
+    fun provideAppDatabase(context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, "database").build()
     }
 }

@@ -31,7 +31,7 @@ interface IRecordsRepository {
     }
 
     fun set(record: Record) {
-        valuesMap[record.id] = record
+        valuesMap[record.uuid] = record
     }
 
     fun setAll(records: Map<UUID, Record>) {
@@ -39,7 +39,7 @@ interface IRecordsRepository {
     }
 
     fun update(record: Record) {
-        valuesMap[record.id] = record
+        valuesMap[record.uuid] = record
     }
 
     fun size(): Int {

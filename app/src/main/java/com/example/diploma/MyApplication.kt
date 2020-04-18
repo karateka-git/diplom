@@ -10,6 +10,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         this.component = DaggerApplicationComponent.builder()
+            .context(applicationContext)
             .build()
     }
 }
