@@ -22,7 +22,7 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginView {
 
     private fun initOnClickListener() {
         ok.setOnClickListener {
-            presenter.clickButtonOk(teacher_name.text.toString())
+            presenter.clickButtonOk(teacher_name.text.toString().trim())
         }
     }
 

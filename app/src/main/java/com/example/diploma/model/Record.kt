@@ -1,17 +1,21 @@
 package com.example.diploma.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.example.diploma.repository.records.IRecordsRepository
 import java.io.Serializable
 import java.util.*
 
-@Entity (tableName = "records_table")
-data class Record (
-    @PrimaryKey
-    val uuid: UUID,
-    var date: String,
-    var title: String,
-    var info: String,
-    var type: String = IRecordsRepository.default
-    ): Serializable
+interface Record : Serializable {
+    companion object Type {
+        const val default = "default"
+        const val dailyRecord = "daily"
+        const val universityRecord = "university"
+        const val holidayRecord = "holiday"
+    }
+
+    val uuid: UUID
+    var date: String
+    var timeFrom: String
+    var timeTo: String
+    var title: String
+    var info: String
+    var type: String
+}

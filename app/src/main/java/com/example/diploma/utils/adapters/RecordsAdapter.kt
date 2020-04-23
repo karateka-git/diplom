@@ -15,7 +15,7 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
     /**
      * The list of posts of the adapter
      */
-    private var records: List<Record> = listOf()
+    private var records: MutableList<Record> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -45,7 +45,8 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
     }
 
     fun updateRecords(records: List<Record>) {
-        this.records = records
+        this.records = records.toMutableList()
+        notifyDataSetChanged()
     }
 
     interface OnRecordListener {
@@ -73,13 +74,13 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
             binding.record = record
             binding.root.setBackgroundColor(ContextCompat.getColor(context,
                 when (record.type) {
-                    IRecordsRepository.dailyRecordsRepository -> {
+                    Record.dailyRecord -> {
                         R.color.colorDailyRecord
                     }
-                    IRecordsRepository.universityRecordsRepository -> {
+                    Record.universityRecord -> {
                         R.color.colorUniversityRecord
                     }
-                    IRecordsRepository.holidayRecordsRepository -> {
+                    Record.holidayRecord -> {
                         R.color.colorHolidayRecord
                     }
                     else -> {

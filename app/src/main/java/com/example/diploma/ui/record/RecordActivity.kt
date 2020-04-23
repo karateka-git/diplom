@@ -2,10 +2,12 @@ package com.example.diploma.ui.record
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.diploma.R
 import com.example.diploma.base.BaseActivity
 import com.example.diploma.databinding.ActivityRecordBinding
+import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
 import com.example.diploma.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_record.*
@@ -21,11 +23,10 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_record)
         binding.record = if (arguments != null) {
-            arguments.getSerializable(Record::class.java.simpleName) as Record
+            arguments.getSerializable(Record::class.java.simpleName) as RecordEntity
         } else {
             presenter.getEmptyRecord()
         }
-
         initOnClickListener()
     }
 
@@ -45,6 +46,9 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
         this.date.setOnClickListener{
             presenter.datePickerDialog()
         }
+        this.time.setOnClickListener {
+            presenter.timePickerDialog()
+        }
         this.button_ok.setOnClickListener{
             presenter.clickButtonOk()
         }
@@ -57,7 +61,11 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
         this.date.text = date
     }
 
-    override fun clickButtonOk() {
+    override fun setTime(time: String) {
+        this.time.setText(time)
+    }
+
+    override fun openMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }

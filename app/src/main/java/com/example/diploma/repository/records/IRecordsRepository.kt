@@ -1,52 +1,34 @@
 package com.example.diploma.repository.records
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.diploma.model.Record
 import java.util.*
 
-interface IRecordsRepository {
-    companion object {
-        const val default = "default"
-        const val dailyRecordsRepository = "daily"
-        const val universityRecordsRepository = "university"
-        const val holidayRecordsRepository = "holiday"
+interface IRecordsRepository<T:Record> {
+
+    val valuesMap: LiveData<List<T>>
+
+    fun newID(): UUID {
+        return UUID.randomUUID()
     }
 
-    val valuesMap: MutableMap<UUID, Record>
+    fun getEmptyRecord(): T
 
-    val type: String
-        get() = default
+    fun get(id: UUID): T?
 
-    fun getEmptyRecord(): Record {
-        return Record(
-            UUID.randomUUID(),
-            Date().toString(),
-            "",
-            "",
-            type
-        )
-    }
+    fun set(record: T)
 
-    fun get(id: UUID): Record? {
-        return valuesMap[id]
-    }
+    fun setAll(records: Map<UUID, T>)
 
-    fun set(record: Record) {
-        valuesMap[record.uuid] = record
-    }
-
-    fun setAll(records: Map<UUID, Record>) {
-        valuesMap.putAll(records)
-    }
-
-    fun update(record: Record) {
-        valuesMap[record.uuid] = record
-    }
+    fun update(record: T)
 
     fun size(): Int {
-        return valuesMap.size
+        return valuesMap.value?.size?:0
     }
 
     fun clearRepository() {
-        valuesMap.clear()
     }
+
+    fun updateUniversityRecords(records: Map<UUID, T>)
 }

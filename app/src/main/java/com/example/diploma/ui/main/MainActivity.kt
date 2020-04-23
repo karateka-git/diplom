@@ -2,6 +2,7 @@ package com.example.diploma.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,7 +14,6 @@ import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
 import com.example.diploma.ui.login.LoginActivity
 import com.example.diploma.ui.record.RecordActivity
-import com.example.diploma.utils.NetworkUtils
 import com.example.diploma.utils.adapters.RecordsAdapter
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_all_records.*
@@ -24,6 +24,8 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnRecordListener,
     NavigationView.OnNavigationItemSelectedListener {
+
+    private val classTag = MainActivity::class.java.simpleName
 
     @Inject
     lateinit var recordsAdapter: RecordsAdapter
@@ -37,11 +39,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
             .listener(this)
             .build().inject(this)
 
-        initAdapter()
-
         presenter.onViewCreated()
 
         initOnClickListener()
+        initAdapter()
+        setupBottomNavigation()
     }
 
     override fun instantiatePresenter(): MainPresenter {
@@ -51,6 +53,13 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     private fun initAdapter() {
         records.layoutManager = LinearLayoutManager(this)
         records.adapter = recordsAdapter
+        val liveData = presenter.recordsRepository.valuesMap
+        liveData.observe(this, androidx.lifecycle.Observer {records ->
+            records?.let{
+                Log.d(classTag, "From observe")
+                recordsAdapter.updateRecords(it)
+            }
+        })
     }
 
     private fun initDrawer() {
@@ -63,10 +72,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         nav_view.setNavigationItemSelectedListener(this)
     }
 
-    override fun setRecords(records: List<Record>) {
-        recordsAdapter.updateRecords(records)
-    }
-
     private fun initOnClickListener() {
         date.setOnClickListener {
             presenter.datePickerDialog()
@@ -75,16 +80,26 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
             val intent = Intent(this, RecordActivity::class.java)
             startActivity(intent)
         }
+
+    }
+
+    private fun setupBottomNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.all_records -> Toast.makeText(this, "Fav", Toast.LENGTH_SHORT).show()
+                R.id.all_records -> presenter.recordsRepository.setSelectedRecords(R.id.all_records)
+                R.id.my_records -> presenter.recordsRepository.setSelectedRecords(R.id.my_records)
+                R.id.holiday_records -> presenter.recordsRepository.setSelectedRecords(R.id.holiday_records)
             }
             true
         }
+
+        bottom_navigation.selectedItemId = R.id.all_records
     }
 
     override fun setDate(date: String) {
         this.date.text = date
+        presenter.recordsRepository.selectedDate = date
+        presenter.recordsRepository.setSelectedRecords(bottom_navigation.selectedItemId)
     }
 
     override fun onRecordClick(record: Record) {

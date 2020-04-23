@@ -1,35 +1,76 @@
 package com.example.diploma.utils
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Context
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MyCalendar {
-    private val calendar = Calendar.getInstance()
-    var year = calendar.get(Calendar.YEAR)
-        private set
-    var month= calendar.get(Calendar.MONTH)
-        private set
-    var day = calendar.get(Calendar.DAY_OF_MONTH)
-        private set
+    companion object {
+        private val classTag = MyCalendar::class.java.simpleName
 
-    fun newDate(day: Int, month: Int, year: Int) {
-        this.day = day
-        this.month = month
-        this.year = year
+        @SuppressLint("SimpleDateFormat")
+        fun getDateFormatter(): SimpleDateFormat {
+            return SimpleDateFormat("dd:MM:yyyy")
+        }
+
+        @SuppressLint("SimpleDateFormat")
+        fun getTimeFormatter(): SimpleDateFormat {
+            return SimpleDateFormat("kk:mm")
+        }
+
+        fun toMyDateFormat(string: String): String {
+            return string.replace('.', ':')
+        }
+    }
+
+    private val calendar = Calendar.getInstance()
+
+    private fun newDate(day: Int, month: Int, year: Int) {
+        calendar.set(year, month, day)
+    }
+
+    private fun newTime(hour: Int, minute: Int) {
+        calendar.set(Calendar.HOUR, hour)
+        calendar.set(Calendar.MINUTE, minute)
+    }
+
+    fun showTimePicker(context: Context, callback: (time: String) -> Unit) {
+        val hour = calendar.get(Calendar.HOUR)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        val callbackWrap = TimePickerDialog.OnTimeSetListener { _, h, m ->
+            newTime(h, m)
+            callback(this.timeToString())
+        }
+
+        TimePickerDialog(context, callbackWrap, hour, minute, true).show()
     }
 
     fun showDatePicker(context: Context, callback: (date: String) -> Unit ) {
+        val year = calendar.get(Calendar.YEAR)
+        val month= calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val callback_wrap = DatePickerDialog.OnDateSetListener{ _, y, m, d ->
+        val callbackWrap = DatePickerDialog.OnDateSetListener{ _, y, m, d ->
             newDate(d,m,y)
-            callback(this.toString())
+            callback(this.dateToString())
         }
 
-        DatePickerDialog(context, callback_wrap, year, month, day).show()
+        DatePickerDialog(context, callbackWrap, year, month, day).show()
     }
 
-    override fun toString(): String {
-        return "$day:${month+1}:$year"
+    fun getCurrentDate(): Date {
+        return calendar.time
+    }
+
+    fun dateToString(): String {
+        return getDateFormatter().format(getCurrentDate())
+    }
+
+    fun timeToString(): String {
+        return getTimeFormatter().format(getCurrentDate())
     }
 }

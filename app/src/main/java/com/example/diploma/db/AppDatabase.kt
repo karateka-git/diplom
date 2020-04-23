@@ -4,10 +4,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.diploma.db.converter.UUIDConverter
-import com.example.diploma.model.Record
-import com.example.diploma.model.RecordDao
+import com.example.diploma.db.dao.RecordDao
+import com.example.diploma.db.entity.RecordEntity
 
-@Database(entities = [Record::class], version = 1, exportSchema = false)
+@Database(entities = [RecordEntity::class],
+    version = 8, exportSchema = false)
 @TypeConverters(UUIDConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract val recordDao : RecordDao

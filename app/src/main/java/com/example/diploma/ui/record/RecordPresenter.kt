@@ -1,11 +1,13 @@
 package com.example.diploma.ui.record
 
 import android.content.Context
+import android.util.Log
 import android.widget.EditText
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
+import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
-import com.example.diploma.repository.records.DailyRecordsRepository
+import com.example.diploma.repository.records.RecordsRepository
 import com.example.diploma.utils.MyCalendar
 import javax.inject.Inject
 
@@ -19,19 +21,23 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
     @Inject
     lateinit var application: MyApplication
 
-    private lateinit var dailyRecordsRepository: DailyRecordsRepository
+    private lateinit var recordsRepository: RecordsRepository
 
     override fun onViewCreated() {
         super.onViewCreated()
-        dailyRecordsRepository = this.application.component.getDailyRepository()
+        recordsRepository = this.application.component.getRepository()
     }
 
     fun datePickerDialog() {
         calendar.showDatePicker(context, view::setDate)
     }
 
-    fun getEmptyRecord(): Record {
-        return dailyRecordsRepository.getEmptyRecord()
+    fun timePickerDialog() {
+        calendar.showTimePicker(context, view::setTime)
+    }
+
+    fun getEmptyRecord(): RecordEntity {
+        return recordsRepository.getEmptyRecord()
     }
 
     private fun validateField(view: EditText): Boolean {
@@ -45,21 +51,23 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
 
     fun clickButtonOk() {
         val binding = view.getBinding()
-        val id = binding.record!!.uuid
+
+        val validTime = validateField(binding.time)
+        val validTitle = validateField(binding.title)
+        val validInfo = validateField(binding.info)
         if (
-            !validateField(binding.title) or
-            !validateField(binding.info)
+            !validTime or
+            !validTitle or
+            !validInfo
         ) return
 
+        val record = binding.record!!
+        record.apply {
+            type = Record.dailyRecord
+        }
 
-        val record = Record(
-            id,
-            binding.date.text.toString(),
-            binding.title.text.toString(),
-            binding.info.text.toString()
-        )
-
-        dailyRecordsRepository.update(record)
-        view.clickButtonOk()
+        Log.d("update", record.toString())
+        recordsRepository.update(record)
+        view.openMainActivity()
     }
 }

@@ -2,14 +2,16 @@ package com.example.diploma.repository.time_tabling
 
 import android.util.Log
 import com.example.diploma.MyApplication
+import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
-import com.example.diploma.repository.records.IRecordsRepository
+import com.example.diploma.utils.MyCalendar
 import com.example.diploma.utils.exception.CustomException
 import com.example.diploma.utils.receiver_xml.IReceiverXml
 import kotlinx.coroutines.*
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
+import org.w3c.dom.NodeList
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.util.*
@@ -75,25 +77,29 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
         }
 
 
-    override fun getSchedule(teacherID: String): Map<UUID, Record> =
+    override fun getSchedule(teacherID: String): Map<UUID, RecordEntity> =
         setInput {
-            val result = mutableMapOf<UUID, Record>()
+            val result = mutableMapOf<UUID, RecordEntity>()
             parserDOM.documentElement.normalize()
             val scheduleList = parserDOM.getElementsByTagName("StringOfSchedule")
+            val timeWindows = nodeListToMap(parserDOM.getElementsByTagName("TimeWindow"), "Index")
             for (i in 0 until scheduleList.length) {
                 val schedule = scheduleList.item(i)
                 if (schedule.nodeType == Node.ELEMENT_NODE) {
                     val element = schedule as Element
+                    val dateTime = getDateTime(timeWindows, element.getAttribute("NumberOfWindow"))
                     if (element.getAttribute("Teacher") == teacherID) {
-                        val record = Record(
+                        val record = RecordEntity(
                             UUID.randomUUID(),
-                            "",
+                            MyCalendar.toMyDateFormat(dateTime["Date"]?:""),
+                            dateTime["From"]?:"",
+                            dateTime["To"]?:"",
                             element.getAttribute("Group"),
                             element.getAttribute("Discipline"),
-                            IRecordsRepository.universityRecordsRepository
+                            Record.universityRecord
                         )
-                        Log.e(
-                            "schedule", "${record.title} ${record.info}"
+                        Log.d(
+                            "schedule", "${record.date} ${record.info}"
                         )
                         result[record.uuid] = record
                     }
@@ -102,4 +108,28 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
             }
             result
         }
+
+    private fun nodeListToMap(list: NodeList, index: String): Map<String, Element> {
+        val result = mutableMapOf<String, Element>()
+        for (i in 0 until list.length) {
+            val item = list.item(i)
+            if (item.nodeType == Node.ELEMENT_NODE) {
+                val element = item as Element
+                result[element.getAttribute(index)] = element
+            }
+        }
+        return result
+    }
+
+    private fun getDateTime(timeWindows: Map<String, Element>, index: String): Map<String, String> {
+        val element = timeWindows[index]
+        val result = mutableMapOf<String, String>()
+        if (element != null) {
+            result["Date"] = element.getAttribute("Date") //TODO add String Const
+            result["From"] = element.getAttribute("From")
+            result["To"] = element.getAttribute("To")
+            return result
+        }
+        return result
+    }
 }
