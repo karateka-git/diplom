@@ -8,7 +8,7 @@ import com.example.diploma.base.BasePresenter
 import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
 import com.example.diploma.repository.records.RecordsRepository
-import com.example.diploma.utils.MyCalendar
+import com.example.diploma.utils.DateAndTimeUtility
 import javax.inject.Inject
 
 class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView)  {
@@ -16,7 +16,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
     lateinit var context: Context
 
     @Inject
-    lateinit var calendar: MyCalendar
+    lateinit var calendar: DateAndTimeUtility
 
     @Inject
     lateinit var application: MyApplication

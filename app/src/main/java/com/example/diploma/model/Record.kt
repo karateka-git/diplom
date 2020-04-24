@@ -18,4 +18,5 @@ interface Record : Serializable {
     var title: String
     var info: String
     var type: String
+    var isCompleted: Boolean
 }

@@ -14,7 +14,8 @@ data class RecordEntity (
     override var timeTo: String,
     override var title: String,
     override var info: String,
-    override var type: String
+    override var type: String,
+    override var isCompleted: Boolean
 ) : Record {
     override fun toString(): String {
         return "id - $uuid, $date, $timeFrom - $timeTo, $title, $info, $type"

@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.diploma.MyApplication
 import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
-import com.example.diploma.utils.MyCalendar
+import com.example.diploma.utils.DateAndTimeUtility
 import com.example.diploma.utils.exception.CustomException
 import com.example.diploma.utils.receiver_xml.IReceiverXml
 import kotlinx.coroutines.*
@@ -91,12 +91,13 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
                     if (element.getAttribute("Teacher") == teacherID) {
                         val record = RecordEntity(
                             UUID.randomUUID(),
-                            MyCalendar.toMyDateFormat(dateTime["Date"]?:""),
+                            DateAndTimeUtility.toMyDateFormat(dateTime["Date"]?:""),
                             dateTime["From"]?:"",
                             dateTime["To"]?:"",
                             element.getAttribute("Group"),
                             element.getAttribute("Discipline"),
-                            Record.universityRecord
+                            Record.universityRecord,
+                            false
                         )
                         Log.d(
                             "schedule", "${record.date} ${record.info}"

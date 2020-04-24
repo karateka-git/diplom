@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
 import com.example.diploma.repository.records.RecordsRepository
-import com.example.diploma.utils.MyCalendar
+import com.example.diploma.utils.DateAndTimeUtility
 import javax.inject.Inject
 
 class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
@@ -12,7 +12,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
     lateinit var context: Context
 
     @Inject
-    lateinit var calendar: MyCalendar
+    lateinit var calendar: DateAndTimeUtility
 
     @Inject
     lateinit var application: MyApplication

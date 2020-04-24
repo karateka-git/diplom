@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.diploma.R
 import com.example.diploma.databinding.RecordBinding
 import com.example.diploma.model.Record
-import com.example.diploma.repository.records.IRecordsRepository
 import kotlinx.android.synthetic.main.record.view.*
 
 class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
@@ -32,15 +31,7 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: RecordsViewHolder, position: Int) {
-        /**
-         * layoutPosition - position in terms of the update layout (last passed layout)
-         * adapterPosition - updated adapter's position of this holder
-         * 16 ms difference between them
-         */
 
-        holder.itemView.info.setOnClickListener {
-            holder.itemView.info.text = "info was clicked"
-        }
         holder.bind(records[holder.adapterPosition])
     }
 
@@ -51,6 +42,7 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
 
     interface OnRecordListener {
         fun onRecordClick(record: Record)
+        fun onCompletedChange(record: Record)
     }
 
     /**
@@ -62,8 +54,16 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
                             private val context: Context ):
                                 RecyclerView.ViewHolder(binding.root) {
         init {
+            /**
+             * layoutPosition - position in terms of the update layout (last passed layout)
+             * adapterPosition - updated adapter's position of this holder
+             * 16 ms difference between them
+             */
             binding.root.setOnClickListener{
                 listener.onRecordClick(records[adapterPosition])
+            }
+            binding.isCompleted.setOnClickListener {
+                listener.onCompletedChange(records[adapterPosition])
             }
         }
 

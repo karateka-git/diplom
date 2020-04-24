@@ -17,13 +17,13 @@ interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(records: List<RecordEntity>)
 
-    @Query("Select * from records where type = :type")
+    @Query("Select * from records where type = :type order by isCompleted, timeFrom")
     fun getAllRecordsType(type: String): LiveData<List<RecordEntity>>
 
     @Query("Select * from records where " +
             "(type = '${Record.dailyRecord}' or " +
             "type = '${Record.universityRecord}') and " +
-            "date = :date")
+            "date = :date order by isCompleted, timeFrom")
     fun getAllRecords(date: String): LiveData<List<RecordEntity>>
 
     @Query("Select * from records where uuid = :uuid")

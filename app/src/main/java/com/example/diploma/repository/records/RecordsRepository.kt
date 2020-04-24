@@ -7,7 +7,7 @@ import com.example.diploma.R
 import com.example.diploma.db.AppDatabase
 import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
-import com.example.diploma.utils.MyCalendar
+import com.example.diploma.utils.DateAndTimeUtility
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import java.util.*
@@ -32,9 +32,19 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     }
 
     init {
-        runBlocking(Dispatchers.IO) {
-            appDatabase.recordDao.deleteAll()
-        }
+//        runBlocking(Dispatchers.IO) {
+//            appDatabase.recordDao.deleteAll()
+//        }
+//        val util = DateAndTimeUtility()
+//        for (i in 0..15) {
+//            util.newTime(i, i)
+//            set(getEmptyRecord().apply {
+//                timeFrom = util.timeToString()
+//                title = "$i title"
+//                info = "$i info"
+//                type = Record.dailyRecord
+//            })
+//        }
     }
 
     fun setSelectedRecords(index: Int) {
@@ -45,12 +55,13 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     override fun getEmptyRecord(): RecordEntity {
         return RecordEntity(
             newID(),
-            MyCalendar().dateToString(),
+            DateAndTimeUtility().dateToString(),
             "",
             "",
             "",
             "",
-            ""
+            "",
+            false
         )
     }
 

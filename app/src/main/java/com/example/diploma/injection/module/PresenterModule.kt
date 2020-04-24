@@ -1,5 +1,5 @@
 package com.example.diploma.injection.module
-import com.example.diploma.utils.MyCalendar
+import com.example.diploma.utils.DateAndTimeUtility
 import dagger.Module
 import dagger.Provides
 
@@ -7,7 +7,7 @@ import dagger.Provides
 object PresenterModule {
     @Provides
     @JvmStatic
-    fun provideCalendar(): MyCalendar {
-        return MyCalendar()
+    fun provideCalendar(): DateAndTimeUtility {
+        return DateAndTimeUtility()
     }
 }

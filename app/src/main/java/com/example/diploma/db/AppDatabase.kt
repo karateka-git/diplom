@@ -8,7 +8,7 @@ import com.example.diploma.db.dao.RecordDao
 import com.example.diploma.db.entity.RecordEntity
 
 @Database(entities = [RecordEntity::class],
-    version = 8, exportSchema = false)
+    version = 9, exportSchema = false)
 @TypeConverters(UUIDConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract val recordDao : RecordDao

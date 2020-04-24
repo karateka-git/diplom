@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diploma.R
 import com.example.diploma.base.BaseActivity
+import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
 import com.example.diploma.ui.login.LoginActivity
@@ -106,6 +107,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         val intent = Intent(this, RecordActivity::class.java)
         intent.putExtra(Record::class.java.simpleName, record)
         startActivity(intent)
+    }
+
+    override fun onCompletedChange(record: Record) {
+        record.isCompleted = !record.isCompleted
+        presenter.recordsRepository.update(record as RecordEntity)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -1,6 +1,7 @@
 package com.example.diploma.repository.time_tabling
 
 import com.example.diploma.db.entity.RecordEntity
+import com.example.diploma.model.Record
 import com.example.diploma.utils.exception.CustomException
 import java.util.*
 

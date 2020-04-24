@@ -7,9 +7,9 @@ import android.content.Context
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MyCalendar {
+class DateAndTimeUtility {
     companion object {
-        private val classTag = MyCalendar::class.java.simpleName
+        private val classTag = DateAndTimeUtility::class.java.simpleName
 
         @SuppressLint("SimpleDateFormat")
         fun getDateFormatter(): SimpleDateFormat {
@@ -62,7 +62,7 @@ class MyCalendar {
         DatePickerDialog(context, callbackWrap, year, month, day).show()
     }
 
-    fun getCurrentDate(): Date {
+    private fun getCurrentDate(): Date {
         return calendar.time
     }
 
