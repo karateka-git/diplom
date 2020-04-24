@@ -2,6 +2,7 @@ package com.example.diploma.ui.login
 
 import android.content.Intent
 import android.util.Log
+import com.example.diploma.Constants
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
 import com.example.diploma.repository.records.RecordsRepository
@@ -41,10 +42,10 @@ class LoginPresenter(loginView: LoginView) : BasePresenter<LoginView>(loginView)
             Log.e(classTag, "${e.message}")
         } catch(e: InternetConnectionException) {
             Log.e(classTag, "${e.message}")
-            NetworkUtils.showDialog(view.getContext(), view, "Check your Internet Connection.")
+            NetworkUtils.showDialog(view.getContext(), view, Constants.checkInternetConnectionMsg)
         } catch(e: ServerConnectionException) {
             Log.e(classTag, "${e.message}")
-            NetworkUtils.showDialog(view.getContext(), view, "Sorry, server is not available.")
+            NetworkUtils.showDialog(view.getContext(), view, Constants.serverIsNotAvailableMsg)
         }
     }
 

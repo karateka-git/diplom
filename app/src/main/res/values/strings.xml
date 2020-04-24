@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">diplom</string>
     <string name="test">HELLOBLAYD</string>
+    <string name="load_schedule">Load Schedule</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="profile">Profile</string>
+    <string name="app_full_name">Dnevnik Prepodavatelya</string>
+    <string name="date_hint">Date</string>
+    <string name="select_your_name">Select your Name</string>
+    <string name="time_hint">Time</string>
+    <string name="title">Title</string>
+    <string name="info">Info</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="all_records">All</string>
+    <string name="meeting_records">My meetings</string>
+    <string name="holiday_records">Holiday</string>
 </resources>

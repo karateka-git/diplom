@@ -2,6 +2,7 @@ package com.example.diploma.utils.receiver_xml
 
 import android.content.Context
 import android.util.Log
+import com.example.diploma.Constants
 import com.example.diploma.utils.exception.CustomException
 import com.example.diploma.utils.NetworkUtils
 import com.example.diploma.utils.exception.network.InternetConnectionException
@@ -17,7 +18,7 @@ import java.net.URL
 
 class ReceiverXmlFromURL(private val context: Context) : IReceiverXml {
     private val TAG = javaClass.name
-    private val path = "http://192.168.0.101/schedule.xml"
+    private val path = Constants.xmlSchedulePath
 
     override suspend fun getInputStream(): InputStream {
         try {

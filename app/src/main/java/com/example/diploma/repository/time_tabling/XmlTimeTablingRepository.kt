@@ -1,6 +1,7 @@
 package com.example.diploma.repository.time_tabling
 
 import android.util.Log
+import com.example.diploma.Constants
 import com.example.diploma.MyApplication
 import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.model.Record
@@ -38,6 +39,7 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
             receiverXML.getInputStream().use {
                 parserDOM = DocumentBuilderFactory.newInstance().newDocumentBuilder()
                     .parse(it)
+                parserDOM.documentElement.normalize()
                 use()
             }
     }
@@ -45,30 +47,18 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
     override fun getTeachers(): Map<String, String> =
         setInput {
             val result = mutableMapOf<String, String>()
-            parserDOM.documentElement.normalize()
-            val teacherList = parserDOM.getElementsByTagName("Teacher")
-            for (i in 0 until teacherList.length) {
-                val teacher = teacherList.item(i)
-                if (teacher.nodeType == Node.ELEMENT_NODE) {
-                    val element = teacher as Element
-                    val index = element.getAttribute("Index")
-                    val name = element.getAttribute("Name")
-                    Log.e(
-                        "Teacher", "$index - $name"
-                    )
-                    result[index] = name
-                }
-            }
-            result
+            val teacherList = parserDOM.getElementsByTagName(Constants.tagNameTeacher)
+            val teacherMap = nodeListToMap(teacherList, Constants.attributeNameIndex)
+            teacherMap.mapValues { it.value.getAttribute(Constants.attributeNameTeacherName) }
         }
 
     override fun getDate(): Map<Int, String> =
         setInput {
             val result = mutableMapOf<Int, String>()
-            val universityTabling = parserDOM.getElementsByTagName("UniversityTimeTabling").item(0)
+            val universityTabling = parserDOM.getElementsByTagName(Constants.tagNameTimeTabling).item(0)
             if (universityTabling.nodeType == Node.ELEMENT_NODE) {
                 val element = universityTabling as Element
-                result[0] = element.getAttribute("Date")
+                result[0] = element.getAttribute(Constants.attributeNameDate)
                 Log.e(
                     "date", "${result[0]}"
                 )
@@ -81,21 +71,24 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
         setInput {
             val result = mutableMapOf<UUID, RecordEntity>()
             parserDOM.documentElement.normalize()
-            val scheduleList = parserDOM.getElementsByTagName("StringOfSchedule")
-            val timeWindows = nodeListToMap(parserDOM.getElementsByTagName("TimeWindow"), "Index")
+            val scheduleList = parserDOM.getElementsByTagName(Constants.tagNameStringOfSchedule)
+            val timeWindows = nodeListToMap(
+                parserDOM.getElementsByTagName(Constants.tagNameTimeWindow),
+                Constants.attributeNameIndex)
+
             for (i in 0 until scheduleList.length) {
                 val schedule = scheduleList.item(i)
                 if (schedule.nodeType == Node.ELEMENT_NODE) {
                     val element = schedule as Element
-                    val dateTime = getDateTime(timeWindows, element.getAttribute("NumberOfWindow"))
-                    if (element.getAttribute("Teacher") == teacherID) {
+                    val dateTime = getDateTime(timeWindows, element.getAttribute(Constants.attributeNameTimeWindow))
+                    if (element.getAttribute(Constants.attributeNameTeacher) == teacherID) {
                         val record = RecordEntity(
                             UUID.randomUUID(),
-                            DateAndTimeUtility.toMyDateFormat(dateTime["Date"]?:""),
-                            dateTime["From"]?:"",
-                            dateTime["To"]?:"",
-                            element.getAttribute("Group"),
-                            element.getAttribute("Discipline"),
+                            DateAndTimeUtility.toMyDateFormat(dateTime[Constants.attributeNameDate]?:""),
+                            dateTime[Constants.attributeNameTimeFrom]?:"",
+                            dateTime[Constants.attributeNameTimeTo]?:"",
+                            element.getAttribute(Constants.attributeNameGroup),
+                            element.getAttribute(Constants.attributeNameDiscipline),
                             Record.universityRecord,
                             false
                         )
@@ -126,9 +119,9 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
         val element = timeWindows[index]
         val result = mutableMapOf<String, String>()
         if (element != null) {
-            result["Date"] = element.getAttribute("Date") //TODO add String Const
-            result["From"] = element.getAttribute("From")
-            result["To"] = element.getAttribute("To")
+            result[Constants.attributeNameDate] = element.getAttribute(Constants.attributeNameDate) //TODO add String Const
+            result[Constants.attributeNameTimeFrom] = element.getAttribute(Constants.attributeNameTimeFrom)
+            result[Constants.attributeNameTimeTo] = element.getAttribute(Constants.attributeNameTimeTo)
             return result
         }
         return result

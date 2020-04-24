@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import com.example.diploma.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -19,8 +20,8 @@ import javax.net.ssl.HttpsURLConnection
 class NetworkUtils {
     companion object {
         private val classTag = NetworkUtils::class.java.simpleName
-        private val reachabilityServer = "https://yandex.ru/"
-        private val myServer = "http://192.168.0.101"
+        private const val reachabilityServer = Constants.internetConnectionTestServer
+        private const val myServer = Constants.xmlScheduleServer
 
         @JvmStatic
         fun hasNetworkAvailable(context: Context): Boolean {
@@ -104,10 +105,10 @@ class NetworkUtils {
                        listener: IDialogListener, message: String) {
             val builder =
                 AlertDialog.Builder(context)
-            builder.setTitle("Network Error")
+            builder.setTitle(Constants.networkErrorTitle)
             builder.setMessage(message)
             builder.setCancelable(false)
-            builder.setPositiveButton("ok") { dialogInterface: DialogInterface, i: Int ->
+            builder.setPositiveButton(Constants.buttonOk) { dialogInterface: DialogInterface, i: Int ->
                 dialogInterface.dismiss()
                 listener.onDialogPositiveClick()
             }

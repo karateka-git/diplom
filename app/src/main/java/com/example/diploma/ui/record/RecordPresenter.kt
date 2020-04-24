@@ -3,6 +3,7 @@ package com.example.diploma.ui.record
 import android.content.Context
 import android.util.Log
 import android.widget.EditText
+import com.example.diploma.Constants
 import com.example.diploma.MyApplication
 import com.example.diploma.base.BasePresenter
 import com.example.diploma.db.entity.RecordEntity
@@ -42,7 +43,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
 
     private fun validateField(view: EditText): Boolean {
         return if (view.text.isEmpty()) {
-            view.error = "Empty field!"
+            view.error = Constants.emptyFieldError
             false
         } else {
             true

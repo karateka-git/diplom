@@ -121,12 +121,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
             R.id.nav_profile -> {
                 Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
             }
-            R.id.nav_messages -> {
-                Toast.makeText(this, "Messages clicked", Toast.LENGTH_SHORT).show()
-            }
-            R.id.nav_friends -> {
-                Toast.makeText(this, "Friends clicked", Toast.LENGTH_SHORT).show()
-            }
             R.id.nav_update -> {
                 Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, LoginActivity::class.java))
