@@ -44,7 +44,6 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
 
         initOnClickListener()
         initAdapter()
-        setupBottomNavigation()
     }
 
     override fun instantiatePresenter(): MainPresenter {
@@ -54,13 +53,14 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     private fun initAdapter() {
         records.layoutManager = LinearLayoutManager(this)
         records.adapter = recordsAdapter
-        val liveData = presenter.recordsRepository.valuesMap
+        val liveData = presenter.getValues()
         liveData.observe(this, androidx.lifecycle.Observer {records ->
             records?.let{
                 Log.d(classTag, "From observe")
                 recordsAdapter.updateRecords(it)
             }
         })
+        setupBottomNavigation()
     }
 
     private fun initDrawer() {
@@ -87,9 +87,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     private fun setupBottomNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.all_records -> presenter.recordsRepository.setSelectedRecords(R.id.all_records)
-                R.id.my_records -> presenter.recordsRepository.setSelectedRecords(R.id.my_records)
-                R.id.holiday_records -> presenter.recordsRepository.setSelectedRecords(R.id.holiday_records)
+                R.id.all_records -> presenter.setSelectedRecords(R.id.all_records)
+                R.id.my_records -> presenter.setSelectedRecords(R.id.my_records)
+                R.id.holiday_records -> presenter.setSelectedRecords(R.id.holiday_records)
             }
             true
         }
@@ -97,10 +97,13 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
         bottom_navigation.selectedItemId = R.id.all_records
     }
 
+    override fun getCurrentIndexSelectedRecords(): Int {
+        return bottom_navigation.selectedItemId
+    }
+
     override fun setDate(date: String) {
         this.date.text = date
-        presenter.recordsRepository.selectedDate = date
-        presenter.recordsRepository.setSelectedRecords(bottom_navigation.selectedItemId)
+        presenter.setDate(date)
     }
 
     override fun onRecordClick(record: Record) {
@@ -110,8 +113,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
     }
 
     override fun onCompletedChange(record: Record) {
-        record.isCompleted = !record.isCompleted
-        presenter.recordsRepository.update(record as RecordEntity)
+        presenter.completedChange(record)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
