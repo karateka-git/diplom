@@ -4,7 +4,7 @@ import com.example.diploma.base.BaseView
 import com.example.diploma.injection.module.ContextModule
 import com.example.diploma.injection.module.PresenterModule
 import com.example.diploma.injection.module.TimeTablingModule
-import com.example.diploma.ui.login.LoginPresenter
+import com.example.diploma.ui.updateSchedule.UpdateSchedulePresenter
 import com.example.diploma.ui.main.MainPresenter
 import com.example.diploma.ui.record.RecordPresenter
 import dagger.BindsInstance
@@ -25,7 +25,7 @@ interface PresenterInjector {
 
     fun inject(recordPresenter: RecordPresenter)
 
-    fun inject(loginPresenter: LoginPresenter)
+    fun inject(updateSchedulePresenter: UpdateSchedulePresenter)
 
     @Component.Builder
     interface Builder {

@@ -10,10 +10,9 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.diploma.R
 import com.example.diploma.base.BaseActivity
-import com.example.diploma.db.entity.RecordEntity
 import com.example.diploma.injection.component.DaggerMainActivityInjector
 import com.example.diploma.model.Record
-import com.example.diploma.ui.login.LoginActivity
+import com.example.diploma.ui.updateSchedule.UpdateScheduleActivity
 import com.example.diploma.ui.record.RecordActivity
 import com.example.diploma.utils.adapters.RecordsAdapter
 import com.google.android.material.navigation.NavigationView
@@ -123,7 +122,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
             }
             R.id.nav_update -> {
                 Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, UpdateScheduleActivity::class.java))
             }
             R.id.nav_logout -> {
                 Toast.makeText(this, "Sign out clicked", Toast.LENGTH_SHORT).show()

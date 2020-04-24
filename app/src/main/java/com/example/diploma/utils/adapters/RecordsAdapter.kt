@@ -1,6 +1,7 @@
 package com.example.diploma.utils.adapters
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -72,21 +73,22 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
          */
         fun bind(record: Record) {
             binding.record = record
-            binding.root.setBackgroundColor(ContextCompat.getColor(context,
-                when (record.type) {
-                    Record.dailyRecord -> {
-                        R.color.colorDailyRecord
-                    }
-                    Record.universityRecord -> {
-                        R.color.colorUniversityRecord
-                    }
-                    Record.holidayRecord -> {
-                        R.color.colorHolidayRecord
-                    }
-                    else -> {
-                        R.color.colorAccent
-                    }
-                }))
+            when (record.type) {
+                Record.dailyRecord -> {
+                    binding.root.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDailyRecord))
+                }
+                Record.universityRecord -> {
+                    binding.root.isClickable = false
+                    binding.isCompleted.visibility = View.INVISIBLE
+                    binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.colorUniversityRecord))
+                }
+                Record.holidayRecord -> {
+                    binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.colorHolidayRecord))
+                }
+                else -> {
+                    binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.colorAccent))
+                }
+            }
             binding.executePendingBindings()
         }
     }

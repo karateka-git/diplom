@@ -1,4 +1,4 @@
-package com.example.diploma.ui.login
+package com.example.diploma.ui.updateSchedule
 
 import android.content.Intent
 import android.util.Log
@@ -14,8 +14,8 @@ import com.example.diploma.utils.exception.network.InternetConnectionException
 import com.example.diploma.utils.exception.network.ServerConnectionException
 import javax.inject.Inject
 
-class LoginPresenter(loginView: LoginView) : BasePresenter<LoginView>(loginView) {
-    private val classTag = LoginPresenter::class.java.simpleName
+class UpdateSchedulePresenter(updateScheduleView: UpdateScheduleView) : BasePresenter<UpdateScheduleView>(updateScheduleView) {
+    private val classTag = UpdateSchedulePresenter::class.java.simpleName
 
     @Inject
     lateinit var xmlTimeTablingRepository: ITimeTablingRepository

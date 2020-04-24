@@ -1,17 +1,16 @@
-package com.example.diploma.ui.login
+package com.example.diploma.ui.updateSchedule
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import com.example.diploma.R
 import com.example.diploma.base.BaseActivity
-import com.example.diploma.utils.NetworkUtils
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_update_schedule.*
 
-class LoginActivity : BaseActivity<LoginPresenter>(), LoginView {
+class UpdateScheduleActivity : BaseActivity<UpdateSchedulePresenter>(), UpdateScheduleView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_update_schedule)
         presenter.onViewCreated()
         val listTeachersName = presenter.getTeachers()
         val adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
@@ -30,8 +29,8 @@ class LoginActivity : BaseActivity<LoginPresenter>(), LoginView {
         finish()
     }
 
-    override fun instantiatePresenter(): LoginPresenter {
-        return LoginPresenter(this)
+    override fun instantiatePresenter(): UpdateSchedulePresenter {
+        return UpdateSchedulePresenter(this)
     }
 
     override fun onDialogNegativeClick() {
