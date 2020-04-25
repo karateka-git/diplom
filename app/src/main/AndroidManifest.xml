@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.diploma">
+    package="com.example.diplom_DP">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,19 +14,19 @@
         android:networkSecurityConfig="@xml/network_sequrity_config"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        android:name="com.example.diploma.MyApplication"
+        android:name="com.example.diplom_DP.MyApplication"
         tools:targetApi="n">
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.diploma"
+            android:authorities="com.example.diplom_DP"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name="com.example.diploma.ui.main.MainActivity"
+        <activity android:name="com.example.diplom_DP.ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,8 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.diploma.ui.record.RecordActivity" />
-        <activity android:name=".ui.updateSchedule.UpdateScheduleActivity" />
+        <activity android:name="com.example.diplom_DP.ui.record.RecordActivity" />
+        <activity android:name="com.example.diplom_DP.ui.updateSchedule.UpdateScheduleActivity" />
     </application>
 
 </manifest>

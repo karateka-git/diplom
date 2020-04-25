@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">diplom</string>
-    <string name="test">HELLOBLAYD</string>
+    <string name="app_name">Dnevnik Prepodavatelya</string>
     <string name="load_schedule">Load Schedule</string>
     <string name="sign_out">Sign Out</string>
     <string name="account_settings">Account Settings</string>
@@ -16,4 +15,8 @@
     <string name="all_records">All</string>
     <string name="meeting_records">My meetings</string>
     <string name="holiday_records">Holiday</string>
+    <string name="success_load_schedule">%1$s, load completed successfully. %2$d new records.</string>
+    <string name="fail_load_schedule">Schedule not found for name \"%s\"</string>
+    <string name="success">Success</string>
+    <string name="time_to_record">Time to Record</string>
 </resources>

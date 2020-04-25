@@ -6,7 +6,7 @@
     <data>
         <variable
             name="record"
-            type="com.example.diploma.db.entity.RecordEntity" />
+            type="com.example.diplom_DP.db.entity.RecordEntity" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
