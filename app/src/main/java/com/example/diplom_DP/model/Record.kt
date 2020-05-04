@@ -4,7 +4,7 @@ import com.example.diplom_DP.Constants
 import java.io.Serializable
 import java.util.*
 
-interface Record : Serializable {
+interface Record : Serializable { // TODO use PARCELABLE
     companion object Type {
         const val default = Constants.defaultType
         const val dailyRecord = Constants.dailyRecordType

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import com.example.diplom_DP.model.Record
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -11,14 +12,16 @@ class DateAndTimeUtility {
     companion object {
         private val classTag = DateAndTimeUtility::class.java.simpleName
 
+        const val delimiter = ':'
+
         @SuppressLint("SimpleDateFormat")
         fun getDateFormatter(): SimpleDateFormat {
-            return SimpleDateFormat("dd:MM:yyyy")
+            return SimpleDateFormat("dd${delimiter}MM${delimiter}yyyy")
         }
 
         @SuppressLint("SimpleDateFormat")
         fun getTimeFormatter(): SimpleDateFormat {
-            return SimpleDateFormat("kk:mm")
+            return SimpleDateFormat("kk${delimiter}mm")
         }
 
         fun toMyDateFormat(string: String): String {
@@ -26,15 +29,25 @@ class DateAndTimeUtility {
         }
     }
 
-    private val calendar = Calendar.getInstance()
+    private val calendar = Calendar.getInstance().apply {
+        timeInMillis = System.currentTimeMillis()
+    }
 
     private fun newDate(day: Int, month: Int, year: Int) {
         calendar.set(year, month, day)
     }
 
     private fun newTime(hour: Int, minute: Int) {
-        calendar.set(Calendar.HOUR, hour)
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
         calendar.set(Calendar.MINUTE, minute)
+    }
+
+    fun getDateAndTimeForRecord(record: Record): Calendar {
+        val arrDate = record.date.split(delimiter)
+        newDate(arrDate[0].toInt(), arrDate[1].toInt() - 1, arrDate[2].toInt())
+        val arrTime = record.timeFrom.split(delimiter)
+        newTime(arrTime[0].toInt(), arrTime[1].toInt())
+        return calendar
     }
 
     fun showTimePicker(context: Context, callback: (time: String) -> Unit) {

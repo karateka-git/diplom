@@ -1,5 +1,7 @@
 package com.example.diplom_DP
 
+import java.lang.Package.getPackage
+
 class Constants {
     companion object {
         // Servers
@@ -34,5 +36,11 @@ class Constants {
         const val dailyRecordType = "daily"
         const val universityRecordType = "university"
         const val holidayRecordType = "holiday"
+
+        // Action
+        const val actionShowRecord = "com.example.diplom_DP.showRecord"
+
+        // Extra key
+        const val id_key = "id"
     }
 }

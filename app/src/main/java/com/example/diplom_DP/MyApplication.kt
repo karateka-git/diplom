@@ -22,5 +22,6 @@ class MyApplication : Application() {
         NotificationHelper.createNotificationChannel(this,
             NotificationManagerCompat.IMPORTANCE_HIGH, false,
             getString(R.string.time_to_record), "Task execution time.")
+
     }
 }

@@ -34,9 +34,9 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     }
 
     init {
-//        runBlocking(Dispatchers.IO) {
-//            appDatabase.recordDao.deleteAll()
-//        }
+        runBlocking(Dispatchers.IO) {
+            appDatabase.recordDao.deleteAll()
+        }
 //        val util = DateAndTimeUtility()
 //        for (i in 0..15) {
 //            util.newTime(i, i)

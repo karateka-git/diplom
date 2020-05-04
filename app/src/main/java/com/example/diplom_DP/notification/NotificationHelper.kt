@@ -9,6 +9,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.diplom_DP.R
+import com.example.diplom_DP.model.Record
 import com.example.diplom_DP.ui.main.MainActivity
 
 object NotificationHelper {
@@ -51,7 +52,6 @@ object NotificationHelper {
             setAutoCancel(autoCancel)
             setStyle(NotificationCompat.BigTextStyle().bigText(bigText))
             priority = NotificationCompat.PRIORITY_DEFAULT
-            setAutoCancel(autoCancel)
 
             val intent = Intent(context, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -61,5 +61,25 @@ object NotificationHelper {
 
         val notificationManager = NotificationManagerCompat.from(context)
         notificationManager.notify(1001, notificationBuilder.build())
+    }
+
+    fun createRecordTimeNotification(context: Context, record: Record) {
+        val channelId = "${context.packageName}-${context.getString(R.string.time_to_record)}"
+        val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
+            setSmallIcon(R.drawable.ic_stat_dp)
+            setContentTitle(record.title)
+            setContentText(record.type)
+            setAutoCancel(true)
+            setStyle(NotificationCompat.BigTextStyle().bigText(record.info))
+            priority = NotificationCompat.PRIORITY_HIGH
+
+            val intent = Intent(context, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+            setContentIntent(pendingIntent)
+        }
+
+        val notificationManager = NotificationManagerCompat.from(context)
+        notificationManager.notify(1002, notificationBuilder.build())
     }
 }

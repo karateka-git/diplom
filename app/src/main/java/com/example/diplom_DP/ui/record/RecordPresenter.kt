@@ -8,6 +8,7 @@ import com.example.diplom_DP.MyApplication
 import com.example.diplom_DP.base.BasePresenter
 import com.example.diplom_DP.db.entity.RecordEntity
 import com.example.diplom_DP.model.Record
+import com.example.diplom_DP.notification.AlarmScheduler
 import com.example.diplom_DP.repository.records.RecordsRepository
 import com.example.diplom_DP.utils.DateAndTimeUtility
 import javax.inject.Inject
@@ -69,6 +70,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
 
         Log.d("update", record.toString())
         recordsRepository.update(record)
+        AlarmScheduler.scheduleAlarmForRecord(view.getContext(), record)
         view.openMainActivity()
     }
 }
