@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import androidx.databinding.InverseMethod
 import com.example.diplom_DP.model.Record
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 class DateAndTimeUtility {
@@ -25,7 +27,42 @@ class DateAndTimeUtility {
         }
 
         fun toMyDateFormat(string: String): String {
-            return string.replace('.', ':')
+            return string.replace('.', delimiter)
+        }
+
+        @InverseMethod("fromDate")
+        fun toDate(dateInMillis: Long): String {
+            val calendar = Calendar.getInstance().apply {
+                timeInMillis = dateInMillis
+            }
+            return getDateFormatter().format(calendar.time)
+        }
+
+        fun fromDate(dateInString: String): Long {
+            val arrDate = dateInString.split(delimiter)
+            val calendar = Calendar.getInstance().apply {
+                set(arrDate[2].toInt(), arrDate[1].toInt() - 1, arrDate[0].toInt())
+            }
+            return resetTime(calendar).timeInMillis
+        }
+
+        fun getCurrentOnlyDate(): Date {
+            return resetTime(Calendar.getInstance()).time
+        }
+
+        fun resetTime(calendar: Calendar): Calendar {
+            return calendar.apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+        }
+
+        fun now(): Calendar {
+            return Calendar.getInstance().apply {
+                timeInMillis = System.currentTimeMillis()
+            }
         }
     }
 
@@ -43,7 +80,7 @@ class DateAndTimeUtility {
     }
 
     fun getDateAndTimeForRecord(record: Record): Calendar {
-        val arrDate = record.date.split(delimiter)
+        val arrDate = toDate(record.date)
         newDate(arrDate[0].toInt(), arrDate[1].toInt() - 1, arrDate[2].toInt())
         val arrTime = record.timeFrom.split(delimiter)
         newTime(arrTime[0].toInt(), arrTime[1].toInt())
@@ -80,7 +117,7 @@ class DateAndTimeUtility {
     }
 
     fun dateToString(): String {
-        return getDateFormatter().format(getCurrentDate())
+        return getDateFormatter().format(getCurrentOnlyDate())
     }
 
     fun timeToString(): String {

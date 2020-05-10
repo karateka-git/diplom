@@ -33,7 +33,7 @@ object AlarmScheduler {
         }
 
         val bos = ByteArrayOutputStream()
-        var out: ObjectOutputStream? = null
+        val out: ObjectOutputStream?
         try {
             out = ObjectOutputStream(bos)
             out.writeObject(record)
@@ -50,7 +50,7 @@ object AlarmScheduler {
             }
         }
 
-        val request = (0..10).random()
+        val request = (0..10).random() // TODO change to static
         Log.d("request", "$request")
         return PendingIntent.getBroadcast(context.applicationContext, request, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     }

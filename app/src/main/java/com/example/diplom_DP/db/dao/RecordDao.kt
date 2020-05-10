@@ -1,10 +1,8 @@
 package com.example.diplom_DP.db.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.example.diplom_DP.db.converter.DateConverter
 import com.example.diplom_DP.db.entity.RecordEntity
 import com.example.diplom_DP.model.Record
 import java.util.*
@@ -24,7 +22,11 @@ interface RecordDao {
             "(type = '${Record.dailyRecord}' or " +
             "type = '${Record.universityRecord}') and " +
             "date = :date order by isCompleted, timeFrom")
-    fun getAllRecords(date: String): LiveData<List<RecordEntity>>
+    fun getAllRecords(date: Long): LiveData<List<RecordEntity>>
+
+    @Query("Select * from records where " +
+            "date >= :date order by isCompleted, timeFrom")
+    fun getTodayAndFutureRecords(date: String): List<RecordEntity>
 
     @Query("Select * from records where uuid = :uuid")
     suspend fun getRecord(uuid: UUID): RecordEntity

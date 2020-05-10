@@ -1,6 +1,7 @@
 package com.example.diplom_DP.repository.records
 
 import androidx.lifecycle.LiveData
+import com.example.diplom_DP.db.entity.RecordEntity
 import com.example.diplom_DP.model.Record
 import java.util.*
 
@@ -30,4 +31,6 @@ interface IRecordsRepository<T:Record> {
     }
 
     fun updateUniversityRecords(records: Map<UUID, T>)
+
+    fun getRecordsForBootService(date: String): List<RecordEntity>
 }

@@ -8,14 +8,13 @@ import com.example.diplom_DP.db.AppDatabase
 import com.example.diplom_DP.db.entity.RecordEntity
 import com.example.diplom_DP.model.Record
 import com.example.diplom_DP.utils.DateAndTimeUtility
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class RecordsRepository(private val appDatabase: AppDatabase) :
     IRecordsRepository <RecordEntity>{
+    val TAG = RecordsRepository::class.java.simpleName
 
     private val classTag = RecordsRepository::class.java.simpleName
 
@@ -26,7 +25,7 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     override var valuesMap = Transformations.switchMap(selectedIndex){
         Log.d(classTag, "From Transformation $selectedDate")
         when (it) {
-            R.id.all_records -> appDatabase.recordDao.getAllRecords(selectedDate)
+            R.id.all_records -> appDatabase.recordDao.getAllRecords(DateAndTimeUtility.fromDate(selectedDate))
             R.id.my_records -> appDatabase.recordDao.getAllRecordsType(Record.dailyRecord)
             R.id.holiday_records -> appDatabase.recordDao.getAllRecordsType(Record.holidayRecord)
             else -> null
@@ -34,9 +33,9 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     }
 
     init {
-        runBlocking(Dispatchers.IO) {
-            appDatabase.recordDao.deleteAll()
-        }
+//        runBlocking(Dispatchers.IO) {
+//            appDatabase.recordDao.deleteAll()
+//        }
 //        val util = DateAndTimeUtility()
 //        for (i in 0..15) {
 //            util.newTime(i, i)
@@ -47,6 +46,7 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
 //                type = Record.dailyRecord
 //            })
 //        }
+        Log.d(TAG, "Init Records Repository")
     }
 
     fun setSelectedRecords(index: Int) {
@@ -57,7 +57,7 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     override fun getEmptyRecord(): RecordEntity {
         return RecordEntity(
             newID(),
-            DateAndTimeUtility().dateToString(),
+            DateAndTimeUtility.fromDate(DateAndTimeUtility().dateToString()),
             "",
             "",
             "",
@@ -95,6 +95,12 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
         runBlocking(Dispatchers.IO) {
             appDatabase.recordDao.deleteRecordsType(Record.universityRecord)
             appDatabase.recordDao.insertAll(records.values.toList())
+        }
+    }
+
+    override fun getRecordsForBootService(date: String): List<RecordEntity> {
+        return runBlocking(Dispatchers.IO) {
+            appDatabase.recordDao.getTodayAndFutureRecords(date)
         }
     }
 }

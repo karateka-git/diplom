@@ -13,7 +13,7 @@ interface Record : Serializable { // TODO use PARCELABLE
     }
 
     val uuid: UUID
-    var date: String
+    var date: Long
     var timeFrom: String
     var timeTo: String
     var title: String

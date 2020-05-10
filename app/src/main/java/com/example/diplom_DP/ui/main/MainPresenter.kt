@@ -1,6 +1,7 @@
 package com.example.diplom_DP.ui.main
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.diplom_DP.MyApplication
 import com.example.diplom_DP.base.BasePresenter
@@ -28,6 +29,7 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
         val currentDate = calendar.dateToString()
         view.setDate(currentDate)
         recordsRepository.selectedDate = currentDate
+        Log.d("Date test", "${DateAndTimeUtility.fromDate(currentDate)}")
     }
 
     fun datePickerDialog() {

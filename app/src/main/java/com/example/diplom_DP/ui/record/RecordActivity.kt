@@ -9,6 +9,7 @@ import com.example.diplom_DP.databinding.ActivityRecordBinding
 import com.example.diplom_DP.db.entity.RecordEntity
 import com.example.diplom_DP.model.Record
 import com.example.diplom_DP.ui.main.MainActivity
+import com.example.diplom_DP.utils.DateAndTimeUtility
 import kotlinx.android.synthetic.main.activity_record.*
 
 class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
@@ -21,11 +22,13 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
         presenter.onViewCreated()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_record)
+        binding.dateAndTimeUtility = DateAndTimeUtility.Companion
         binding.record = if (arguments != null) {
             arguments.getSerializable(Record::class.java.simpleName) as RecordEntity
         } else {
             presenter.getEmptyRecord()
         }
+        val record = binding.record as RecordEntity
         initOnClickListener()
     }
 

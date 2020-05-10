@@ -9,7 +9,7 @@ import java.util.*
 data class RecordEntity (
     @PrimaryKey
     override val uuid: UUID,
-    override var date: String,
+    override var date: Long,
     override var timeFrom: String,
     override var timeTo: String,
     override var title: String,

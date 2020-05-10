@@ -23,7 +23,7 @@ class AlarmReceiver : BroadcastReceiver() {
             if (intent.action.equals(Constants.actionShowRecord, ignoreCase = true)) {
                 val bis = ByteArrayInputStream(intent.getByteArrayExtra(Record::class.java.simpleName))
                 var objInput: ObjectInput? = null
-                var record: Record? = null
+                val record: Record?
                 try {
                     objInput = ObjectInputStream(bis)
                     record = objInput.readObject() as Record

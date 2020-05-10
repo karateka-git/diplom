@@ -67,7 +67,7 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
         record.apply {
             type = Record.dailyRecord
         }
-
+        Log.d("Date test", "${record.date}")
         Log.d("update", record.toString())
         recordsRepository.update(record)
         AlarmScheduler.scheduleAlarmForRecord(view.getContext(), record)

@@ -84,7 +84,7 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
                     if (element.getAttribute(Constants.attributeNameTeacher) == teacherID) {
                         val record = RecordEntity(
                             UUID.randomUUID(),
-                            DateAndTimeUtility.toMyDateFormat(dateTime[Constants.attributeNameDate]?:""),
+                            DateAndTimeUtility.fromDate(DateAndTimeUtility.toMyDateFormat(dateTime[Constants.attributeNameDate]?:"")),
                             dateTime[Constants.attributeNameTimeFrom]?:"",
                             dateTime[Constants.attributeNameTimeTo]?:"",
                             element.getAttribute(Constants.attributeNameGroup),
