@@ -28,7 +28,6 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
         } else {
             presenter.getEmptyRecord()
         }
-        val record = binding.record as RecordEntity
         initOnClickListener()
     }
 

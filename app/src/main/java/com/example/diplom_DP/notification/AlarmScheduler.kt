@@ -58,16 +58,9 @@ object AlarmScheduler {
     /**
      * Schedules a single alarm
      */
-    private fun scheduleAlarm(context: Context, record: Record, alarmIntent: PendingIntent, alarmMgr: AlarmManager) {
-
-        // Set up the time to schedule the alarm
+    private fun scheduleAlarm(record: Record, alarmIntent: PendingIntent, alarmMgr: AlarmManager) {
         val date = DateAndTimeUtility
-        Log.d("Test", "current ${date.dateToString()} . ${date.timeToString()}")
         val datetimeToAlarm = date.getTimeForSchedule(record)
-
-        Log.d("Test", "future ${date.dateToString()} . ${date.timeToString()}")
-//        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-//            datetimeToAlarm.timeInMillis, (1000 * 60 * 5).toLong(), alarmIntent)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, datetimeToAlarm.timeInMillis, alarmIntent)
         } else {
@@ -82,26 +75,6 @@ object AlarmScheduler {
         // get the PendingIntent for the alarm
         val alarmIntent = createPendingIntent(context, record)
 
-//        notific(context, alarmIntent)
-//
-//        // schedule the alarm
-        scheduleAlarm(context, record, alarmIntent, alarmMgr)
-    }
-
-    fun notific(context: Context, pendingIntent: PendingIntent) {
-        val channelId = "${context.packageName}-${context.getString(R.string.time_to_record)}"
-        val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {
-            setSmallIcon(R.drawable.ic_stat_dp)
-            setContentTitle("test")
-            setContentText("test")
-            setAutoCancel(true)
-            setStyle(NotificationCompat.BigTextStyle().bigText("test"))
-            priority = NotificationCompat.PRIORITY_HIGH
-
-            setContentIntent(pendingIntent)
-        }
-
-        val notificationManager = NotificationManagerCompat.from(context)
-        notificationManager.notify(1002, notificationBuilder.build())
+        scheduleAlarm(record, alarmIntent, alarmMgr)
     }
 }

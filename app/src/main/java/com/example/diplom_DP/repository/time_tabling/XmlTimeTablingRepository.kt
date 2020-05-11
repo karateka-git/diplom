@@ -46,7 +46,6 @@ class XmlTimeTablingRepository(private val receiverXML: IReceiverXml) : ITimeTab
 
     override fun getTeachers(): Map<String, String> =
         setInput {
-            val result = mutableMapOf<String, String>()
             val teacherList = parserDOM.getElementsByTagName(Constants.tagNameTeacher)
             val teacherMap = nodeListToMap(teacherList, Constants.attributeNameIndex)
             teacherMap.mapValues { it.value.getAttribute(Constants.attributeNameTeacherName) }
