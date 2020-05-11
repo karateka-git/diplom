@@ -6,7 +6,7 @@
     <data>
         <variable
             name="DateAndTimeUtility"
-            type="com.example.diplom_DP.utils.DateAndTimeUtility.Companion" />
+            type="com.example.diplom_DP.utils.DateAndTimeUtility" />
         <variable
             name="record"
             type="com.example.diplom_DP.db.entity.RecordEntity" />

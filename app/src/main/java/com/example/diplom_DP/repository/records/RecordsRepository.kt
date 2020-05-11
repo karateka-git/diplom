@@ -57,7 +57,7 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
     override fun getEmptyRecord(): RecordEntity {
         return RecordEntity(
             newID(),
-            DateAndTimeUtility.fromDate(DateAndTimeUtility().dateToString()),
+            DateAndTimeUtility.fromDate(DateAndTimeUtility.dateToString()),
             "",
             "",
             "",

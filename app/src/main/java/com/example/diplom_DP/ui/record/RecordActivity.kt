@@ -22,7 +22,7 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
         presenter.onViewCreated()
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_record)
-        binding.dateAndTimeUtility = DateAndTimeUtility.Companion
+        binding.dateAndTimeUtility = DateAndTimeUtility
         binding.record = if (arguments != null) {
             arguments.getSerializable(Record::class.java.simpleName) as RecordEntity
         } else {

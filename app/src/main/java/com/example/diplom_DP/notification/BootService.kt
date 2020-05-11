@@ -13,7 +13,7 @@ class BootService : IntentService("BootService") {
             .context(applicationContext)
             .build()
         val repository = component.getRepository()
-        val date = DateAndTimeUtility()
+        val date = DateAndTimeUtility
         val records = repository.getRecordsForBootService(date.dateToString())
         Log.d(TAG, "current date - ${date.dateToString()}")
         for ((key, record) in records) {

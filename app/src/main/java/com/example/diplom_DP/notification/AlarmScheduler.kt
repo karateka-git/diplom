@@ -61,9 +61,9 @@ object AlarmScheduler {
     private fun scheduleAlarm(context: Context, record: Record, alarmIntent: PendingIntent, alarmMgr: AlarmManager) {
 
         // Set up the time to schedule the alarm
-        val date = DateAndTimeUtility()
+        val date = DateAndTimeUtility
         Log.d("Test", "current ${date.dateToString()} . ${date.timeToString()}")
-        val datetimeToAlarm = date.getDateAndTimeForRecord(record)
+        val datetimeToAlarm = date.getTimeForSchedule(record)
 
         Log.d("Test", "future ${date.dateToString()} . ${date.timeToString()}")
 //        alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,

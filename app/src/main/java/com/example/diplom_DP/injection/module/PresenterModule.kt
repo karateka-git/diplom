@@ -8,6 +8,6 @@ object PresenterModule {
     @Provides
     @JvmStatic
     fun provideCalendar(): DateAndTimeUtility {
-        return DateAndTimeUtility()
+        return DateAndTimeUtility
     }
 }
