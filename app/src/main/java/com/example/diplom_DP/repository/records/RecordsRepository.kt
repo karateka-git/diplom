@@ -98,7 +98,7 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
         }
     }
 
-    override fun getRecordsForBootService(date: String): List<RecordEntity> {
+    override fun getRecordsForBootService(date: Long): List<RecordEntity> {
         return runBlocking(Dispatchers.IO) {
             appDatabase.recordDao.getTodayAndFutureRecords(date)
         }

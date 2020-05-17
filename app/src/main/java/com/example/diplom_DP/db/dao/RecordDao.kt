@@ -26,7 +26,7 @@ interface RecordDao {
 
     @Query("Select * from records where " +
             "date >= :date order by isCompleted, timeFrom")
-    fun getTodayAndFutureRecords(date: String): List<RecordEntity>
+    fun getTodayAndFutureRecords(date: Long): List<RecordEntity>
 
     @Query("Select * from records where uuid = :uuid")
     suspend fun getRecord(uuid: UUID): RecordEntity

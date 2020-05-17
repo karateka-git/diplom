@@ -32,5 +32,5 @@ interface IRecordsRepository<T:Record> {
 
     fun updateUniversityRecords(records: Map<UUID, T>)
 
-    fun getRecordsForBootService(date: String): List<RecordEntity>
+    fun getRecordsForBootService(date: Long): List<RecordEntity>
 }
