@@ -67,7 +67,8 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
     }
 
     override fun openMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
+        finish()
     }
 }

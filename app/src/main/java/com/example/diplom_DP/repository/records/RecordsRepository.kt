@@ -49,6 +49,15 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
         Log.d(TAG, "Init Records Repository")
     }
 
+    fun getSelectedRecords(): String {
+        return when (selectedIndex.value) {
+            R.id.all_records -> Record.dailyRecord
+            R.id.my_records -> Record.dailyRecord
+            R.id.holiday_records -> Record.holidayRecord
+            else -> Record.dailyRecord
+        }
+    }
+
     fun setSelectedRecords(index: Int) {
         Log.d(classTag, "From setSelectedRecords $selectedDate")
         selectedIndex.value = index
@@ -62,7 +71,7 @@ class RecordsRepository(private val appDatabase: AppDatabase) :
             "",
             "",
             "",
-            "",
+            getSelectedRecords(),
             false
         )
     }

@@ -65,9 +65,9 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
         ) return
 
         val record = binding.record!!
-        record.apply {
-            type = Record.dailyRecord
-        }
+//        record.apply {
+//            type = Record.dailyRecord
+//        }
         Log.d("Date test", "${record.date}")
         Log.d("update", record.toString())
         recordsRepository.set(record)
