@@ -18,7 +18,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d(TAG, "onReceive() called with: context = [$context], intent = [$intent]")
-        var test = intent.getIntExtra("test", 0)
         if (intent.action != null) {
             if (intent.action.equals(Constants.actionShowRecord, ignoreCase = true)) {
                 val bis = ByteArrayInputStream(intent.getByteArrayExtra(Record::class.java.simpleName))

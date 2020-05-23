@@ -28,15 +28,21 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <activity android:name="com.example.diplom_DP.ui.main.MainActivity"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.NoActionBar"
+                android:screenOrientation="portrait"
+                tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.diplom_DP.ui.record.RecordActivity" />
-        <activity android:name="com.example.diplom_DP.ui.updateSchedule.UpdateScheduleActivity" />
+        <activity android:name="com.example.diplom_DP.ui.record.RecordActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity android:name="com.example.diplom_DP.ui.updateSchedule.UpdateScheduleActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
         <receiver android:name=".notification.AlarmReceiver"/>
         <receiver android:name=".notification.BootReceiver"
             android:enabled="true">

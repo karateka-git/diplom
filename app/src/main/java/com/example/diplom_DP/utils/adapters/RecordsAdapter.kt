@@ -85,7 +85,7 @@ class RecordsAdapter(private val listener: OnRecordListener) : RecyclerView.Adap
                     binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.colorHolidayRecord))
                 }
                 else -> {
-                    binding.root.setBackgroundColor(ContextCompat.getColor(context,R.color.colorAccent))
+                    binding.root.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDailyRecord))
                 }
             }
             binding.executePendingBindings()

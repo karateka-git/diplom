@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="colorUniversityRecord">#594AED</color>
-    <color name="colorDailyRecord">#4AEDE5</color>
-    <color name="colorHolidayRecord">#349213</color>
+    <color name="colorPrimary">#358920</color>
+    <color name="colorPrimaryDark">#256716</color>
+    <color name="colorPrimaryVariant">#46A94C</color>
+    <color name="colorSecondary">#E4D257</color>
+    <color name="colorSecondaryVariant">#BDA846</color>
+
+    <color name="colorUniversityRecord">#C66E10</color>
+    <color name="colorDailyRecord">#ED9C28</color>
+    <color name="colorHolidayRecord">#F6C151</color>
 </resources>
