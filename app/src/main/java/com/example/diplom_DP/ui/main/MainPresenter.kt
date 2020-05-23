@@ -32,8 +32,8 @@ class MainPresenter(mainView: MainView) : BasePresenter<MainView>(mainView) {
         Log.d("Date test", "${DateAndTimeUtility.fromDate(currentDate)}")
     }
 
-    fun datePickerDialog() {
-        calendar.showDatePicker(context, view::setDate)
+    fun datePickerDialog(date: String) {
+        calendar.showDatePicker(context, date, view::setDate)
     }
 
     fun getValues(): LiveData<List<RecordEntity>> {

@@ -65,7 +65,7 @@ object DateAndTimeUtility {
         return calendar
     }
 
-    fun getTimeForSchedule(record: Record): Calendar {
+    fun getTimeForAlarm(record: Record): Calendar {
         val arrDate = toDate(record.date).split(delimiter)
         val arrTime = record.timeFrom.split(delimiter)
         return newDate(arrDate[0].toInt(), arrDate[1].toInt() - 1, arrDate[2].toInt(), arrTime[0].toInt(), arrTime[1].toInt())
@@ -81,14 +81,16 @@ object DateAndTimeUtility {
         val minute = calendar.get(Calendar.MINUTE)
 
         val callbackWrap = TimePickerDialog.OnTimeSetListener { _, h, m ->
-            callback(timeToString(newDate(day,month,year, h, m)))
+            callback(timeToString(newDate(day, month, year, h, m)))
         }
 
         TimePickerDialog(context, callbackWrap, hour, minute, true).show()
     }
 
-    fun showDatePicker(context: Context, callback: (date: String) -> Unit ) {
-        val calendar = now()
+    fun showDatePicker(context: Context, currentDate: String, callback: (date: String) -> Unit ) {
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = fromDate(currentDate)
+        }
         val year = calendar.get(Calendar.YEAR)
         val month= calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)

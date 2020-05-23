@@ -6,10 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import com.example.diplom_DP.Constants
-import com.example.diplom_DP.R
 import com.example.diplom_DP.model.Record
 import com.example.diplom_DP.utils.DateAndTimeUtility
 import java.io.ByteArrayOutputStream
@@ -60,7 +57,7 @@ object AlarmScheduler {
      */
     private fun scheduleAlarm(record: Record, alarmIntent: PendingIntent, alarmMgr: AlarmManager) {
         val date = DateAndTimeUtility
-        val datetimeToAlarm = date.getTimeForSchedule(record)
+        val datetimeToAlarm = date.getTimeForAlarm(record)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmMgr.setExact(AlarmManager.RTC_WAKEUP, datetimeToAlarm.timeInMillis, alarmIntent)
         } else {

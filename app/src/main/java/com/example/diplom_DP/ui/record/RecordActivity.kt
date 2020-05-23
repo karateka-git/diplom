@@ -45,7 +45,7 @@ class RecordActivity : BaseActivity<RecordPresenter>(), RecordView {
 
     private fun initOnClickListener() {
         this.date.setOnClickListener{
-            presenter.datePickerDialog()
+            presenter.datePickerDialog(date.text.toString())
         }
         this.time.setOnClickListener {
             presenter.timePickerDialog()

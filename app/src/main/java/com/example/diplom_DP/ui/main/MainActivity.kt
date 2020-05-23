@@ -74,7 +74,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView, RecordsAdapter.OnR
 
     private fun initOnClickListener() {
         date.setOnClickListener {
-            presenter.datePickerDialog()
+            presenter.datePickerDialog(date.text.toString())
         }
         fab.setOnClickListener {
             val intent = Intent(this, RecordActivity::class.java)

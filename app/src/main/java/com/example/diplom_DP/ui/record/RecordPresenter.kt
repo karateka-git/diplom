@@ -30,8 +30,9 @@ class RecordPresenter(mainView: RecordView) : BasePresenter<RecordView>(mainView
         recordsRepository = this.application.component.getRepository()
     }
 
-    fun datePickerDialog() {
-        calendar.showDatePicker(context, view::setDate)
+    fun datePickerDialog(date: String) {
+        Log.d("date", date)
+        calendar.showDatePicker(context, date, view::setDate)
     }
 
     fun timePickerDialog() {
